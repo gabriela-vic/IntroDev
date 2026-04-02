@@ -37,7 +37,7 @@ async def criar_usuario(user: Usuario):
     db_usuarios.append(user.model_dump()) 
     return {"status": "sucesso", "usuario": user.nome}
 
-# 3. Rota de AÇÃO login
+# 3. Rota de EXIBIÇÃO login
 @app.get("/login", response_class=HTMLResponse)
 async def pagina_login(request: Request):
     return templates.TemplateResponse(
@@ -46,7 +46,7 @@ async def pagina_login(request: Request):
         context={"request": request}
     )
 
-# 4. Rota de EXIBIÇÃO login
+# 4. Rota de AÇÃO login
 @app.post("/login")
 async def login(username: str = Form(...), password: str = Form(...), response: Response = None):
     usuario_encontrado = next(
