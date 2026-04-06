@@ -1,0 +1,15 @@
+<div id="contador-container">
+    <h2>Contador de Curtidas</h2>
+    <p>Total de curtidas: <strong>{{ likes }}</strong></p>
+
+    <button hx-post="/curtir" hx-target="#contador-container" hx-swap="outerHTML">
+        Curtir! 👍
+    </button>
+
+    <button hx-post="/resetar" 
+            hx-target="#contador-container" 
+            hx-swap="outerHTML"
+            hx-confirm="Tem certeza que deseja zerar as curtidas?">
+        Zerar Tudo 🗑️
+    </button>
+</div>

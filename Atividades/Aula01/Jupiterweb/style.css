@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
 
 * {
     margin: 0;
@@ -10,38 +11,33 @@ body {
     flex-direction: column;
     min-height: 100vh; 
     font-family: Arial, sans-serif;
+    background-color: #f8fafc; /* Um cinza bem claro para destacar os blocos */
 }
 
+/* --- HEADER --- */
 .main-header {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .header-top {
+    max-width: 1400px; /* Aumentei para os logos ficarem mais nas pontas */
+    margin: 0 auto;
+    width: 100%;
     display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: white;
-    height: 100px; 
+    justify-content: flex-start;
+    padding: 10px 40px;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 20px; 
+    gap: 30px; 
 }
 
-.logo-usp img {
-    width: 150px;
-    height: auto;
-}
-
-.logo-texto img {
-    width: 300px;
-    height: auto;
-    margin-top: 5px; 
-}
+.logo-usp img { width: 140px; height: auto; }
+.logo-texto img { width: 280px; height: auto; }
 
 .header-bar {
     width: 100%;
@@ -54,108 +50,189 @@ body {
     color: white;
     font-family: Verdana, sans-serif;
     font-size: 10px;
-    padding-right: 10px;
+    padding-right: 40px;
 }
 
-
-@media (max-width: 600px) {
-    .header-top {
-        height: auto;
-        flex-direction: column;
-        padding: 15px;
-        align-items: flex-start;
-    }
-    .logo-container {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-}
-
-.conteudo{
+/* --- LAYOUT PRINCIPAL --- */
+.conteudo {
     display: flex;
+    width: 100%;       /* Ocupa a largura toda */
+    max-width: 1400px; /* Limite largo para o seu Mac Air */
+    margin: 30px auto; 
+    gap: 30px;
+    padding: 0 40px;   /* Respiro nas laterais */
     flex: 1;
+    align-items: flex-start;
 }
 
+/* --- MENU --- */
 .menu {
     display: flex;
     flex-direction: column;
-    width: 250px;
-    gap: 25px;
-    align-items: center;
-    margin-top: 25px;
-    border-radius: 15px;
-    background-color: aqua;
+    width: 300px;
+    gap: 20px;
+    flex-shrink: 0;
 }
 
 .caixa-menu {
-    background-color: rgb(255, 149, 0);
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(235, 147, 6, 0.419); 
-    width: 200px; 
+    background-color: #f39c12; 
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+    display: flex;
+    flex-direction: column;
+}
 
-}
-#menu-publico{
-    height: 250px;
-}
-#menu-restrito{
-    height: 150px;
-}
+#menu-publico { min-height: 300px; }
+#menu-restrito { min-height: 150px; }
 
 .menu-titulo {
     color: white;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
-    padding-bottom: 5px;
-    text-transform: uppercase;
+    font-size: 17px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4); 
+    padding-bottom: 8px;
+    font-weight: bold;
 }
 
 .menu-conteudo {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Distribui os itens verticalmente */
+    flex: 1; /* Faz a lista ocupar o espaço todo da caixa laranja */
 }
 
 .menu-conteudo li {
-    margin-bottom: 8px;
-}
-
-.menu-conteudo li a {
+    padding: 8px 0;
     color: white;
-    text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
+    cursor: pointer; /* Transforma a seta em "maozinha" */
+    transition: color 0.3s ease;
 }
 
-.menu-conteudo li a:hover {
-    text-decoration: underline;
+/* Efeito de passar o mouse nos itens da lista */
+.menu-conteudo li:hover {
+    color: #2c3e50; /* Muda para um azul escuro ao passar o mouse */
+    font-weight: bold;
 }
 
-/* Centralizando o formulário na área de login */
+/* --- ÁREA DE LOGIN (RETANGULAR E HARMONICA) --- */
 .area-login {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f7f6; 
+    background-color: white; 
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    min-height: 500px;
 }
-
 
 .login-form {
-    background-color: white;
-    padding: 40px;
+    width: 85%;        
+    max-width: 600px;  /* Limite para não ficar exagerado */
+    padding: 45px;
     display: flex; 
     flex-direction: column;
-    gap: 15px;
-    border-radius: 8px;
-   
+    gap: 25px;
 }
-#botao-entrar:hover{
-    background-color: rgb(255, 149, 0);
+
+.login-form h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    text-align:left;
+    margin-bottom: 20px;
+    
+    background: white;
+    
+    -webkit-background-clip: text; /* Chrome, Safari e Edge antigo */
+    background-clip: text;         /* Propriedade padrão (Firefox e futuros) */
+    
+    -webkit-text-fill-color: transparent; 
+    color: transparent;                   
+    
+    
+    -webkit-text-stroke: 3px #f39c12;
+    paint-order: stroke fill;
+    filter: drop-shadow(2px 2px 0px #cbf4ef);
+    
+    
+    text-shadow: 4px 4px 0px rgba(230, 224, 217, 0.1);
+    letter-spacing: -1px;
 }
-#botao-entrar{
-    background-color: rgba(11, 161, 161, 0.811);
+
+.login-form input {
+    padding: 15px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fdfdfd;
 }
-.main-footer{
-    background-color: aquamarine;
-    height: 100px;
+
+#botao-entrar {
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #42b1b3;
+    transition: background-color 0.3s;
+}
+
+#botao-entrar:hover {
+    background-color: #f39c12;
+}
+
+
+.main-footer {
+    background-color: #f1f5f9; /* Tom de cinza bem claro para o fundo */
+    padding: 20px 0;
     width: 100%;
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaço entre os links e o texto de baixo */
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Estilo dos links (Ciano) */
+.footer-links {
+    font-size: 14px;
+    color: #42b1b3; /* O mesmo ciano do seu botão entrar */
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.footer-links a {
+    color: #42b1b3;
+    text-decoration: none; /* Remove o sublinhado padrão */
+    cursor: pointer;
+}
+
+.footer-links a:hover {
+    text-decoration: underline; /* Aparece sublinhado ao passar o mouse */
+}
+
+.footer-links span {
+    color: #94a3b8; /* Cor da barra separadora | */
+}
+
+/* Estilo do texto de baixo (Cinza Escuro) */
+.footer-copy {
+    font-size: 12px;
+    color: #475569; /* Cinza escuro elegante */
+    text-align: center;
+}
+
+
+@media (max-width: 900px) {
+    .conteudo { flex-direction: column; padding: 0 20px; }
+    .menu { width: 100%; }
+    .area-login { width: 100%; }
 }
