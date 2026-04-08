@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Science of Fashion{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">THE SCIENCE OF FASHION</a>
+            <div class="menu">
+                <a href="/">Home</a>
+                <a href="/catalogo">Catálogo de Fibras</a>
+                <a href="/blog">Blog</a>
+                <a href="/sobre">Sobre</a>
+                
+                <div class="user-menu">
+                    {% if usuario %}
+                        <span>Olá, {{ usuario.nome }}!</span>
+                        <a href="/usuarios/editar" class="btn btn-outline">Perfil</a>
+                        <a href="/logout" class="btn btn-outline">Sair</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-outline">Entrar</a>
+                        <a href="/usuarios/cadastro" class="btn btn-primary">Cadastrar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - The Science of Fashion - Desenvolvido por Gabriela Victor</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Explorando a ciência por trás das fibras têxteis</p>
+    </footer>
+</body>
+</html>

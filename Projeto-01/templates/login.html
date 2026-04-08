@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Login - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1> Login</h1>
+        
+        <form id="login-form"
+              hx-post="/login" 
+              hx-target="#resultado" 
+              hx-swap="innerHTML"
+              hx-indicator="#spinner">
+            
+            <div class="form-group">
+                <label for="username">Nome de usuário:</label>
+                <input type="text" 
+                       id="username" 
+                       name="username" 
+                       required 
+                       placeholder="Digite seu username">
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" 
+                       id="senha" 
+                       name="senha" 
+                       required 
+                       placeholder="Digite sua senha">
+            </div>
+            
+            <button type="submit" class="btn-submit">Entrar</button>
+            
+            <div id="spinner" class="spinner"></div>
+            <div id="resultado"></div>
+        </form>
+        
+        <div class="auth-divider">
+            <p>Ainda não tem conta? <a href="/usuarios/cadastro">Cadastre-se</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Limpar mensagens de erro anteriores quando começar a digitar
+    document.getElementById('login-form').addEventListener('input', function() {
+        const resultado = document.getElementById('resultado');
+        if (resultado.innerHTML) {
+            resultado.innerHTML = '';
+        }
+    });
+</script>
+{% endblock %}

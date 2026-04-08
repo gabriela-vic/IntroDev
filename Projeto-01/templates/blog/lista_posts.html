@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div class="blog-container">
+    <div class="blog-header">
+        <h1>📝 Blog The Science of Fashion</h1>
+        <p>Artigos sobre tecnologia têxtil, inovações e moda sustentável</p>
+    </div>
+
+    <div class="posts-grid">
+        {% for post in posts %}
+        <article class="post-card">
+            {% if post.foto_url %}
+            <div class="post-card-image">
+                <img src="{{ post.foto_url }}" alt="{{ post.titulo }}">
+            </div>
+            {% else %}
+            <div class="post-card-image placeholder">
+                <span>📷</span>
+            </div>
+            {% endif %}
+            
+            <div class="post-card-content">
+                <h2 class="post-card-title">
+                    <a href="/blog/post/{{ post.id }}">{{ post.titulo }}</a>
+                </h2>
+                <div class="post-card-meta">
+                    <span class="post-date">📅 {{ post.data_publicacao.strftime('%d/%m/%Y') }}</span>
+                </div>
+                <p class="post-card-excerpt">{{ post.conteudo[:200] }}...</p>
+                <a href="/blog/post/{{ post.id }}" class="btn btn-primary btn-read-more">Ler artigo →</a>
+            </div>
+        </article>
+        {% else %}
+        <div class="no-posts">
+            <p>Nenhum post encontrado.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

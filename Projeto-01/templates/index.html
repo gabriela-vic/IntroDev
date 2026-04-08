@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Home - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🔬 A Ciência por trás da Moda</h1>
+    <p>Explore o fascinante mundo das fibras têxteis sob o microscópio</p>
+    <a href="/catalogo" class="btn" style="background: white; color: #667eea; margin-top: 1rem; display: inline-block;">Explorar Catálogo →</a>
+</div>
+
+<section>
+    <h2 style="text-align: center; margin-bottom: 2rem;">O que você vai encontrar?</h2>
+    <div class="grid">
+        <div class="card">
+            <div style="padding: 2rem; text-align: center; font-size: 3rem;">🔬</div>
+            <div class="card-content">
+                <h3>Microscopia de Fibras</h3>
+                <p>Visualize fibras naturais e sintéticas em alta resolução, entendendo sua estrutura única.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div style="padding: 2rem; text-align: center; font-size: 3rem;">📚</div>
+            <div class="card-content">
+                <h3>Conteúdo Técnico</h3>
+                <p>Detalhes sobre propriedades, performance e aplicações de cada tipo de fibra.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div style="padding: 2rem; text-align: center; font-size: 3rem;">🌱</div>
+            <div class="card-content">
+                <h3>Sustentabilidade</h3>
+                <p>Informações sobre impacto ambiental e alternativas sustentáveis na moda.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="margin-top: 4rem; background: #f0f0f0; padding: 3rem; border-radius: 12px; text-align: center;">
+    <h2>Blog The Science of Fashion</h2>
+    <p style="margin-bottom: 1.5rem;">Artigos sobre tecnologia têxtil, inovações e tendências sustentáveis</p>
+    <a href="/blog" class="btn btn-primary">Ler Blog →</a>
+</section>
+{% endblock %}

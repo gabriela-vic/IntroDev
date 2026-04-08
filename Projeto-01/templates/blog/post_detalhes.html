@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titulo }} - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div class="post-detail-container">
+    <!-- Botão voltar -->
+    <div class="post-back-link">
+        <a href="/blog" class="back-link">← Voltar para o blog</a>
+    </div>
+
+    <!-- Cabeçalho do post -->
+    <article class="post-detail">
+        <header class="post-detail-header">
+            <h1 class="post-detail-title">{{ post.titulo }}</h1>
+            <div class="post-detail-meta">
+                <span class="post-date">📅 {{ post.data_publicacao.strftime('%d de %B de %Y') }}</span>
+            </div>
+        </header>
+
+        <!-- Imagem de destaque -->
+        {% if post.foto_url %}
+        <div class="post-detail-image">
+            <img src="{{ post.foto_url }}" alt="{{ post.titulo }}">
+        </div>
+        {% endif %}
+
+        <!-- Conteúdo do post -->
+        <div class="post-detail-content">
+            {{ post.conteudo }}
+        </div>
+
+        <!-- Botão favoritar -->
+        <div class="post-actions">
+            {% if usuario %}
+            <button hx-post="/blog/{{ post.id }}/favoritar" 
+                    hx-target="this" 
+                    hx-swap="outerHTML"
+                    class="btn-favoritar">
+                ☆ Favoritar este artigo
+            </button>
+            {% else %}
+            <a href="/login" class="btn-favoritar disabled">
+                🔒 Faça login para favoritar
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Seção de comentários -->
+        <div class="comments-section">
+            <h3 class="comments-title">💬 Comentários ({{ post.comentarios|length }})</h3>
+            
+            <!-- Formulário de novo comentário -->
+            {% if usuario %}
+            <div class="comment-form-container">
+                <form class="comment-form" 
+                      hx-post="/blog/{{ post.id }}/comentar" 
+                      hx-target="#comments-list" 
+                      hx-swap="beforeend"
+                      hx-on::after-request="this.reset()">
+                    <textarea name="conteudo" 
+                              rows="3" 
+                              placeholder="Deixe seu comentário..." 
+                              required></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar comentário</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="login-to-comment">
+                <p><a href="/login">Faça login</a> para deixar um comentário</p>
+            </div>
+            {% endif %}
+
+            <!-- Lista de comentários -->
+            <div id="comments-list" class="comments-list">
+                {% for comentario in post.comentarios %}
+                <div class="comment-item" id="comentario-{{ comentario.id }}">
+                    <div class="comment-header">
+                        <strong class="comment-author">{{ comentario.usuario.username }}</strong>
+                        <span class="comment-date">{{ comentario.data_postagem.strftime('%d/%m/%Y %H:%M') }}</span>
+                        {% if usuario and usuario.id == comentario.usuario_id %}
+                        <button hx-delete="/comentario/{{ comentario.id }}"
+                                hx-target="#comentario-{{ comentario.id }}"
+                                hx-swap="outerHTML"
+                                hx-confirm="Tem certeza que quer deletar este comentário?"
+                                class="btn-delete-comment">
+                            🗑️ Excluir
+                        </button>
+                        {% endif %}
+                    </div>
+                    <p class="comment-content">{{ comentario.conteudo }}</p>
+                </div>
+                {% else %}
+                <div class="no-comments">
+                    <p>Seja o primeiro a comentar!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+</div>
+{% endblock %}

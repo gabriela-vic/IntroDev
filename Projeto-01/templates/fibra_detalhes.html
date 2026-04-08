@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ fibra.nome }} - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div>
+    <!-- Botão de voltar -->
+    <a href="/catalogo" style="display: inline-block; margin-bottom: 2rem; color: #007aff; text-decoration: none;">← Voltar ao catálogo</a>
+    
+    <!-- Cabeçalho da fibra -->
+    <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ fibra.nome }}</h1>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="tag">{{ fibra.categoria }}</span>
+            <span class="tag">{{ fibra.origem }}</span>
+        </div>
+    </div>
+    
+    <!-- Grid principal: Imagem do microscópio + informações -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <!-- Imagem do microscópio -->
+        <div style="background: #000; border-radius: 12px; overflow: hidden;">
+            <img src="{{ fibra.foto_microscopio_url }}" alt="Microscopia de {{ fibra.nome }}" style="width: 100%; display: block;">
+            <p style="color: #999; text-align: center; padding: 0.5rem; font-size: 0.8rem;">VISUALIZAÇÃO MICROSCÓPICA</p>
+        </div>
+        
+        <!-- Informações técnicas -->
+        <div>
+            <div style="margin-bottom: 1.5rem;">
+                <h3>🧬 Detalhes Técnicos</h3>
+                <p>{{ fibra.detalhes_tecnicos }}</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3>👗 Uso e Performance</h3>
+                <p>{{ fibra.uso_performance }}</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3>🌍 Sustentabilidade</h3>
+                <p>{{ fibra.sustentabilidade }}</p>
+            </div>
+            
+            <!-- Botão de favoritar -->
+            {% if usuario %}
+                <button hx-post="/favoritar/{{ fibra.id }}" 
+                        hx-target="this" 
+                        hx-swap="outerHTML"
+                        style="background: #007aff; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer;">
+                    ☆ Favoritar esta fibra
+                </button>
+            {% else %}
+                <a href="/login" style="display: inline-block; background: #ccc; color: #666; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; cursor: not-allowed;">
+                    Faça login para favoritar
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Galeria de imagens relacionadas -->
+    {% if fibra.fotos %}
+    <div style="margin-top: 3rem;">
+        <h2>📸 Galeria de Aplicações</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            {% for foto in fibra.fotos %}
+            <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <img src="{{ foto.url }}" alt="{{ foto.legenda }}" style="width: 100%; height: 200px; object-fit: cover;">
+                {% if foto.legenda %}
+                <p style="padding: 0.5rem; font-size: 0.8rem; color: #666;">{{ foto.legenda }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Fibras relacionadas (se houver) -->
+    {% if fibra.fibras_relacionadas %}
+    <div style="margin-top: 3rem; padding: 1.5rem; background: #f0f0f0; border-radius: 12px;">
+        <h3>🔗 Fibras Relacionadas</h3>
+        <p>{{ fibra.fibras_relacionadas }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

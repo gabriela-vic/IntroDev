@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro - The Science of Fashion{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Criar Conta</h1>
+        
+        <form id="cadastro-form"
+              hx-post="/usuarios/cadastro" 
+              hx-target="#resultado" 
+              hx-swap="innerHTML"
+              hx-indicator="#spinner">
+            
+            <div class="form-group">
+                <label for="nome">Nome completo:</label>
+                <input type="text" 
+                       id="nome" 
+                       name="nome" 
+                       required 
+                       placeholder="Ex: Maria Silva">
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Nome de usuário:</label>
+                <input type="text" 
+                       id="username" 
+                       name="username" 
+                       required 
+                       placeholder="Ex: maria_silva">
+                <small>Será usado para login (sem espaços)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       required 
+                       placeholder="exemplo@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" 
+                       id="senha" 
+                       name="senha" 
+                       required 
+                       placeholder="Mínimo 3 caracteres">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmar_senha">Confirmar senha:</label>
+                <input type="password" 
+                       id="confirmar_senha" 
+                       name="confirmar_senha" 
+                       required>
+            </div>
+            
+            <button type="submit" class="btn-submit">Cadastrar</button>
+            
+            <div id="spinner" class="spinner"></div>
+            <div id="resultado"></div>
+        </form>
+        
+        <div class="auth-divider">
+            <p>Já tem uma conta? <a href="/login">Faça login</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Validação de formulário antes do envio
+    document.getElementById('cadastro-form').addEventListener('submit', function(e) {
+        const senha = document.getElementById('senha').value;
+        const confirmar = document.getElementById('confirmar_senha').value;
+        
+        if (senha !== confirmar) {
+            e.preventDefault();
+            document.getElementById('resultado').innerHTML = `
+                <div class="result-message error">
+                    As senhas não coincidem!
+                </div>
+            `;
+            return false;
+        }
+        
+        if (senha.length < 3) {
+            e.preventDefault();
+            document.getElementById('resultado').innerHTML = `
+                <div class="result-message error">
+                    A senha deve ter pelo menos 3 caracteres!
+                </div>
+            `;
+            return false;
+        }
+        
+        return true;
+    });
+</script>
+{% endblock %}
