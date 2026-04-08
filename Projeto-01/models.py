@@ -2,7 +2,7 @@ from typing import List, Optional
 from datetime import datetime
 from sqlmodel import Field, Relationship, SQLModel
 
-# --- TABELAS DE LIGAÇÃO (MANY-TO-MANY) ---
+# --- MANY-TO-MANY ---
 
 class FavoritoFibra(SQLModel, table=True):
     usuario_id: Optional[int] = Field(default=None, foreign_key="usuario.id", primary_key=True)

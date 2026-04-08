@@ -1,0 +1,323 @@
+/* static/css/pages/microscopio.css */
+
+/* Hero Section */
+.microscopio-hero {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    border-radius: 32px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.microscopio-hero-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.microscopio-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.microscopio-hero-description {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Grid de informações */
+.microscopio-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.microscopio-info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.microscopio-info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.microscopio-info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+}
+
+.microscopio-info-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Título das categorias */
+.categorias-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.categorias-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+}
+
+/* Grid de cards das categorias */
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Card estilo "levanta e escurece" */
+.categoria-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.categoria-naturais {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.categoria-sinteticas {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.categoria-card:hover {
+    transform: translateY(-12px);
+    filter: brightness(0.85);
+}
+
+.categoria-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    transition: background 0.4s ease;
+    z-index: 0;
+}
+
+.categoria-card:hover::before {
+    background: rgba(0,0,0,0.2);
+}
+
+.categoria-card-front {
+    position: relative;
+    z-index: 1;
+}
+
+.categoria-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.categoria-title {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.categoria-hover-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.categoria-card-description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.categoria-card:hover .categoria-card-description {
+    opacity: 1;
+}
+
+.categoria-card-description p {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.categoria-link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: white;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.categoria-link:hover {
+    transform: translateX(5px);
+    background: #f0f0f0;
+}
+
+/* Seção de curiosidades */
+.curiosidades-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 32px;
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+.curiosidades-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+}
+
+.curiosidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.curiosidade-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.curiosidade-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.curiosidade-numero {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.curiosidade-item p {
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .microscopio-hero {
+        padding: 2rem;
+    }
+    
+    .microscopio-hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .microscopio-hero-description {
+        font-size: 1rem;
+    }
+    
+    .categorias-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .categoria-card {
+        min-height: 280px;
+    }
+    
+    .categoria-title {
+        font-size: 1.5rem;
+    }
+    
+    .curiosidades-section {
+        padding: 2rem;
+    }
+    
+    .curiosidades-title {
+        font-size: 1.5rem;
+    }
+    
+    .curiosidades-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .microscopio-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .categoria-card-description {
+        padding: 1.5rem;
+    }
+    
+    .categoria-card-description p {
+        font-size: 0.85rem;
+    }
+}

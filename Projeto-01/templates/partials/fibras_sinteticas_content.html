@@ -1,0 +1,126 @@
+
+<!-- Hero Section -->
+<section class="sinteticas-hero">
+    <div class="sinteticas-hero-content">
+        <div class="sinteticas-hero-icon">⚗️</div>
+        <h1 class="sinteticas-hero-title">Fibras Sintéticas</h1>
+        <p class="sinteticas-hero-description">
+            As fibras sintéticas são produzidas industrialmente a partir de polímeros derivados do petróleo. 
+            Desenvolvidas para oferecer alta durabilidade, resistência, elasticidade e versatilidade, elas revolucionaram 
+            a indústria têxtil, permitindo criações inovadoras e aplicações técnicas que vão da moda esportiva 
+            a componentes automotivos e médicos.
+        </p>
+    </div>
+</section>
+
+<!-- Card informativo sobre fibras sintéticas -->
+<section class="sinteticas-info-card">
+    <div class="info-card-content">
+        <h2>🧪 O que são Fibras Sintéticas?</h2>
+        <p>Fibras sintéticas são aquelas produzidas pelo homem através de processos químicos. Elas podem ser classificadas em:</p>
+        <div class="info-card-grid">
+            <div class="info-item">
+                <span class="info-emoji">🔬</span>
+                <h3>Poliéster</h3>
+                <p>Resistente, secagem rápida, não amassa</p>
+            </div>
+            <div class="info-item">
+                <span class="info-emoji">🧵</span>
+                <h3>Nylon</h3>
+                <p>Elástico, resistente à abrasão, leve</p>
+            </div>
+            <div class="info-item">
+                <span class="info-emoji">🎽</span>
+                <h3>Acrílico</h3>
+                <p>Macio, leve, similar à lã</p>
+            </div>
+            <div class="info-item">
+                <span class="info-emoji">💧</span>
+                <h3>Polipropileno</h3>
+                <p>Hidrofóbico, flutua, não absorve umidade</p>
+            </div>
+            <div class="info-item">
+                <span class="info-emoji">🩺</span>
+                <h3>Elastano (Lycra)</h3>
+                <p>Alta elasticidade, recuperação rápida</p>
+            </div>
+            <div class="info-item">
+                <span class="info-emoji">🌿</span>
+                <h3>Biossintéticas</h3>
+                <p>Fibras ecológicas de fontes renováveis</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Carrossel de fibras sintéticas -->
+<section class="carrossel-section">
+    <h2 class="carrossel-title">🔬 Explore as Fibras Sintéticas</h2>
+    <p class="carrossel-subtitle">Passe o mouse sobre os cards para ver mais detalhes</p>
+    
+    <div class="carrossel-container" id="carrossel-container">
+        <button class="carrossel-btn prev-btn" id="prevBtn" aria-label="Anterior">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        
+        <div class="carrossel-track" id="carrosselTrack">
+            {% for fibra in fibras %}
+            <div class="carrossel-card">
+                <div class="carrossel-card-inner">
+                    <div class="carrossel-card-front">
+                        <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}" class="carrossel-card-img">
+                        <h3 class="carrossel-card-title">{{ fibra.nome }}</h3>
+                        <span class="carrossel-card-tag">{{ fibra.origem }}</span>
+                    </div>
+                    <div class="carrossel-card-back">
+                        <h4>{{ fibra.nome }}</h4>
+                        <p class="carrossel-card-desc">{{ fibra.detalhes_tecnicos[:120] }}...</p>
+                        <div class="carrossel-card-props">
+                            <span>💪 {{ fibra.uso_performance[:50] }}...</span>
+                        </div>
+                        <a href="/laboratorio/microscopio/fibras/sinteticas/{{ fibra.id }}" class="carrossel-card-link">Ver detalhes →</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="carrossel-empty">
+                <p>Nenhuma fibra sintética cadastrada ainda.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <button class="carrossel-btn next-btn" id="nextBtn" aria-label="Próximo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Indicadores de página -->
+    <div class="carrossel-indicators" id="carrosselIndicators"></div>
+</section>
+
+<!-- Curiosidades -->
+<section class="curiosidades-sinteticas">
+    <h3 class="curiosidades-sinteticas-title">📖 Curiosidades sobre Fibras Sintéticas</h3>
+    <div class="curiosidades-sinteticas-grid">
+        <div class="curiosidade-card">
+            <span class="curiosidade-emoji">🧪</span>
+            <p>O náilon foi a primeira fibra sintética totalmente artificial, criada em 1935 pela DuPont.</p>
+        </div>
+        <div class="curiosidade-card">
+            <span class="curiosidade-emoji">🌍</span>
+            <p>Garrafas PET recicladas podem ser transformadas em poliéster para roupas.</p>
+        </div>
+        <div class="curiosidade-card">
+            <span class="curiosidade-emoji">💪</span>
+            <p>O Kevlar é uma fibra sintética cinco vezes mais resistente que o aço.</p>
+        </div>
+        <div class="curiosidade-card">
+            <span class="curiosidade-emoji">🩱</span>
+            <p>O elastano pode esticar até 500% do seu tamanho original sem deformar.</p>
+        </div>
+    </div>
+</section>

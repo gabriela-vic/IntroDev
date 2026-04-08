@@ -55,7 +55,7 @@ async def form_cadastro(request: Request):
     
     return templates.TemplateResponse(request, "cadastro.html", {})
 
-# Cadastrar usuário (POST)
+# Cadastrar usuário 
 @app.post("/usuarios/cadastro", response_class=HTMLResponse)
 async def criar_usuario(
     request: Request,
@@ -122,16 +122,17 @@ async def login(
 # Logout
 @app.get("/logout", response_class=HTMLResponse)
 async def logout(request: Request, response: Response):
-    # Para requisições HTMX
+    
     if "HX-Request" in request.headers:
         redirect_response = HTMLResponse(content="<p>Logout realizado! <a href='/'>Home</a></p>")
         redirect_response.delete_cookie(key="usuario_id", path="/")
         return redirect_response
     
-    # Para requisições normais
+    
     redirect_response = RedirectResponse(url="/", status_code=303)
     redirect_response.delete_cookie(key="usuario_id", path="/")
     return redirect_response
+
 # Editar perfil
 @app.put("/usuarios/editar", response_class=HTMLResponse)
 async def editar_usuario(
@@ -180,7 +181,7 @@ async def excluir_conta(
 
 # **** LABORATÓRIO ****
 
-
+# Ler pagina principal laboratorio
 @app.get("/laboratorio", response_class=HTMLResponse)
 async def apresentar_laboratorio(
     request: Request,
@@ -191,38 +192,142 @@ async def apresentar_laboratorio(
     
     return templates.TemplateResponse(request, "laboratorio.html", {"usuario": usuario})
 
-@app.get("/catalogo", response_class=HTMLResponse)
-async def listar_fibras(
-    request: Request, 
+
+# Ler pagina microscopio 
+@app.get("/laboratorio/microscopio", response_class=HTMLResponse)
+async def microscopio(
+    request: Request,
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/microscopio_content.html", {"usuario": usuario})
+    
+    return templates.TemplateResponse(request, "microscopio.html", {"usuario": usuario})
+
+
+# Ler pagina fibras naturais 
+@app.get("/laboratorio/microscopio/fibras/naturais", response_class=HTMLResponse)
+async def fibras_naturais(
+    request: Request,
     session: Session = Depends(get_session),
     usuario: Optional[Usuario] = Depends(get_usuario_logado)
 ):
-    fibras = session.exec(select(Fibra)).all()
+    fibras = session.exec(select(Fibra).where(Fibra.categoria == "Natural")).all()
     
     if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/fibras_list.html", {"fibras": fibras, "usuario": usuario})
+        return templates.TemplateResponse(request, "partials/fibras_naturais_content.html", {"fibras": fibras, "usuario": usuario})
     
-    return templates.TemplateResponse(request, "catalogo.html", {"fibras": fibras, "usuario": usuario})
+    return templates.TemplateResponse(request, "fibras/naturais.html", {"fibras": fibras, "usuario": usuario})
 
-@app.get("/catalogo/fibra/{fibra_id}", response_class=HTMLResponse)
-async def detalhes_fibra(
-    request: Request, 
-    fibra_id: int, 
+
+# Ler pagina fibras sinteticas 
+@app.get("/laboratorio/microscopio/fibras/sinteticas", response_class=HTMLResponse)
+async def fibras_sinteticas(
+    request: Request,
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    
+    fibras = session.exec(select(Fibra).where(Fibra.categoria == "Sintética")).all()
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/fibras_sinteticas_content.html", {"fibras": fibras, "usuario": usuario})
+    
+    return templates.TemplateResponse(request, "fibras/sinteticas.html", {"fibras": fibras, "usuario": usuario})
+
+
+# Ler pagina fibra natural especifica
+@app.get("/laboratorio/microscopio/fibras/naturais/{fibra_id}", response_class=HTMLResponse)
+async def detalhes_fibra_natural(
+    request: Request,
+    fibra_id: int,
     session: Session = Depends(get_session),
     usuario: Optional[Usuario] = Depends(get_usuario_logado)
 ):
     fibra = session.get(Fibra, fibra_id)
-    if not fibra:
+    if not fibra or fibra.categoria != "Natural":
         raise HTTPException(status_code=404, detail="Fibra não encontrada")
     
-    if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/fibra_detalhes.html", {"fibra": fibra, "usuario": usuario})
+    fibras_categoria = session.exec(
+        select(Fibra).where(Fibra.categoria == "Natural").order_by(Fibra.id)
+    ).all()
     
-    return templates.TemplateResponse(request, "fibra_detalhes.html", {"fibra": fibra, "usuario": usuario})
+    indices = {f.id: i for i, f in enumerate(fibras_categoria)}
+    indice_atual = indices.get(fibra_id, 0)
+    total_fibras = len(fibras_categoria)
+    
+    fibra_anterior = fibras_categoria[indice_atual - 1] if indice_atual > 0 else None
+    fibra_proxima = fibras_categoria[indice_atual + 1] if indice_atual < total_fibras - 1 else None
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/fibra_detalhes_content.html", {
+            "fibra": fibra,
+            "usuario": usuario,
+            "fibra_anterior": fibra_anterior,
+            "fibra_proxima": fibra_proxima,
+            "indice_atual": indice_atual + 1,
+            "total_fibras": total_fibras,
+            "categoria_url": "naturais"
+        })
+    
+    return templates.TemplateResponse(request, "fibra_detalhes.html", {
+        "fibra": fibra,
+        "usuario": usuario,
+        "fibra_anterior": fibra_anterior,
+        "fibra_proxima": fibra_proxima,
+        "indice_atual": indice_atual + 1,
+        "total_fibras": total_fibras,
+        "categoria_url": "naturais"
+    })
 
+
+# Ler pagina fibra sintetica especifica
+@app.get("/laboratorio/microscopio/fibras/sinteticas/{fibra_id}", response_class=HTMLResponse)
+async def detalhes_fibra_sintetica(
+    request: Request,
+    fibra_id: int,
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    fibra = session.get(Fibra, fibra_id)
+    if not fibra or fibra.categoria != "Sintética":
+        raise HTTPException(status_code=404, detail="Fibra não encontrada")
+    
+    fibras_categoria = session.exec(
+        select(Fibra).where(Fibra.categoria == "Sintética").order_by(Fibra.id)
+    ).all()
+    
+    indices = {f.id: i for i, f in enumerate(fibras_categoria)}
+    indice_atual = indices.get(fibra_id, 0)
+    total_fibras = len(fibras_categoria)
+    
+    fibra_anterior = fibras_categoria[indice_atual - 1] if indice_atual > 0 else None
+    fibra_proxima = fibras_categoria[indice_atual + 1] if indice_atual < total_fibras - 1 else None
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/fibra_detalhes_content.html", {
+            "fibra": fibra,
+            "usuario": usuario,
+            "fibra_anterior": fibra_anterior,
+            "fibra_proxima": fibra_proxima,
+            "indice_atual": indice_atual + 1,
+            "total_fibras": total_fibras,
+            "categoria_url": "sinteticas"
+        })
+    
+    return templates.TemplateResponse(request, "fibra_detalhes.html", {
+        "fibra": fibra,
+        "usuario": usuario,
+        "fibra_anterior": fibra_anterior,
+        "fibra_proxima": fibra_proxima,
+        "indice_atual": indice_atual + 1,
+        "total_fibras": total_fibras,
+        "categoria_url": "sinteticas"
+    })
 
 # **** BLOG ****
 
+# Ler pagina principal blog
 @app.get("/blog", response_class=HTMLResponse)
 async def listar_posts(
     request: Request, 
@@ -236,6 +341,7 @@ async def listar_posts(
     
     return templates.TemplateResponse(request, "blog/lista_posts.html", {"posts": posts, "usuario": usuario})
 
+# Ler pagina post blog
 @app.get("/blog/post/{post_id}", response_class=HTMLResponse)
 async def ler_post(
     request: Request, 
@@ -255,8 +361,7 @@ async def ler_post(
 
 # **** INTERAÇÕES ****
 
-# Adicione esta rota no seu main.py, junto com as outras rotas
-
+# Ler pagina de perfil do usuario
 @app.get("/perfil", response_class=HTMLResponse)
 async def perfil_usuario(
     request: Request,
