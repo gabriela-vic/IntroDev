@@ -7,11 +7,10 @@
     justify-content: center;
     padding: 2rem;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 0;
 }
 
 .cadastro-card {
-    max-width: 500px;
+    max-width: 550px;
     width: 100%;
     background: white;
     border-radius: 32px;
@@ -245,7 +244,6 @@
     }
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .cadastro-container {
         padding: 1rem;

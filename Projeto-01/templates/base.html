@@ -7,6 +7,16 @@
     
     <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/components.css">
+
+    <!-- CSS de páginas -->
+    <link rel="stylesheet" href="/static/css/pages/laboratorio.css">
+    <link rel="stylesheet" href="/static/css/pages/microscopio.css">
+    <link rel="stylesheet" href="/static/css/pages/fibras_naturais.css">
+    <link rel="stylesheet" href="/static/css/pages/fibras_sinteticas.css">
+    <link rel="stylesheet" href="/static/css/pages/fibra_detalhes_content.css">
+    <link rel="stylesheet" href="/static/css/pages/sobre.css">
+    <link rel="stylesheet" href="/static/css/pages/login.css">
+    <link rel="stylesheet" href="/static/css/pages/cadastro.css">
     {% block extra_css %}{% endblock %}
     
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -24,10 +34,33 @@
         <div class="nav-bar">
             <div class="nav-container">
                 <div class="nav-links">
-                    <a href="/" class="nav-link">Início</a>
-                    <a href="/sobre" class="nav-link">Sobre</a>
-                    <a href="/laboratorio" class="nav-link">Laboratório</a>
-                    <a href="/blog" class="nav-link">Blog</a>
+                    <a href="/" 
+                       class="nav-link"
+                       hx-get="/"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Início</a>
+                    
+                    <a href="/sobre" 
+                       class="nav-link"
+                       hx-get="/sobre"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Sobre</a>
+                    
+                    <a href="/laboratorio" 
+                       class="nav-link"
+                       hx-get="/laboratorio"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Laboratório</a>
+                    
+                    <a href="/blog" 
+                       class="nav-link"
+                       hx-get="/blog"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Blog</a>
                 </div>
 
                 <div class="nav-actions">
@@ -84,19 +117,43 @@
                 <button class="close-menu" id="closeMenuBtn">&times;</button>
             </div>
             <div class="mobile-menu-links">
-                <a href="/" class="mobile-link">🏠 Início</a>
-                <a href="/sobre" class="mobile-link">📖 Sobre</a>
-                <a href="/laboratorio" class="mobile-link">🔬 Laboratório</a>
-                <a href="/blog" class="mobile-link">📝 Blog</a>
+                <a href="/" 
+                   class="mobile-link"
+                   hx-get="/"
+                   hx-target="main"
+                   hx-push-url="true"
+                   hx-swap="innerHTML">Início</a>
+                
+                <a href="/sobre" 
+                   class="mobile-link"
+                   hx-get="/sobre"
+                   hx-target="main"
+                   hx-push-url="true"
+                   hx-swap="innerHTML">Sobre</a>
+                
+                <a href="/laboratorio" 
+                   class="mobile-link"
+                   hx-get="/laboratorio"
+                   hx-target="main"
+                   hx-push-url="true"
+                   hx-swap="innerHTML">Laboratório</a>
+                
+                <a href="/blog" 
+                   class="mobile-link"
+                   hx-get="/blog"
+                   hx-target="main"
+                   hx-push-url="true"
+                   hx-swap="innerHTML">Blog</a>
+                
                 <div class="mobile-divider"></div>
                 {% if usuario %}
-                    <a href="/perfil" class="mobile-link">👤 Meu Perfil</a>
-                    <a href="/usuarios/favoritos/fibras" class="mobile-link">❤️ Fibras Favoritas</a>
-                    <a href="/usuarios/favoritos/posts" class="mobile-link">📌 Posts Favoritos</a>
-                    <a href="/logout" class="mobile-link logout">🚪 Sair</a>
+                    <a href="/perfil" class="mobile-link">Meu Perfil</a>
+                    <a href="/usuarios/favoritos/fibras" class="mobile-link">Fibras Favoritas</a>
+                    <a href="/usuarios/favoritos/posts" class="mobile-link">Posts Favoritos</a>
+                    <a href="/logout" class="mobile-link logout">Sair</a>
                 {% else %}
-                    <a href="/login" class="mobile-link">🔑 Entrar</a>
-                    <a href="/usuarios/cadastro" class="mobile-link">📝 Cadastrar</a>
+                    <a href="/login" class="mobile-link">Entrar</a>
+                    <a href="/usuarios/cadastro" class="mobile-link">Cadastrar</a>
                 {% endif %}
             </div>
         </div>

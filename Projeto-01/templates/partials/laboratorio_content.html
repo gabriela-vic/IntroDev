@@ -1,4 +1,3 @@
-
 <section id="lab-hero" class="lab-hero-section">
     <div class="lab-hero-content">
         <h1 class="lab-hero-title">Laboratório Têxtil</h1>
@@ -35,7 +34,12 @@
                         <li>Filamentos lisos do poliéster</li>
                         <li>Estrutura porosa do rayon</li>
                     </ul>
-                    <a href="/catalogo" class="lab-card-link">Explorar Catálogo →</a>
+                    <a href="/laboratorio/microscopio" 
+                       class="lab-card-link"
+                       hx-get="/laboratorio/microscopio"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Explorar Microscópio →</a>
                 </div>
             </div>
         </div>
@@ -65,14 +69,18 @@
                         <li>Acabamentos e beneficiamentos</li>
                         <li>Controle de qualidade</li>
                     </ul>
-                    <a href="/catalogo" class="lab-card-link">Explorar Processos →</a>
+                    <a href="/laboratorio/microscopio" 
+                       class="lab-card-link"
+                       hx-get="/laboratorio/microscopio"
+                       hx-target="main"
+                       hx-push-url="true"
+                       hx-swap="innerHTML">Explorar Cadeia Têxtil →</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Seção complementar (futura expansão) -->
 <section id="lab-extra" class="lab-extra-section">
     <h3 class="lab-extra-title">Em breve no Laboratório</h3>
     <div class="lab-extra-grid">

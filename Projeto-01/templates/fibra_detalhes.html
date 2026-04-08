@@ -2,17 +2,14 @@
 
 {% block title %}{{ fibra.nome }} - The Science of Fashion{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="/static/css/pages/fibra_detalhes.css">
-<link rel="stylesheet" href="/static/css/pages/fibra_detalhes_content.css">
-{% endblock %}
-
 {% block extra_js %}
 <script src="/static/js/fibra_detalhes.js" defer></script>
 {% endblock %}
 
 {% block content %}
-<div id="fibra-detalhes-container" hx-target="this" hx-swap="outerHTML">
-    {% include "partials/fibra_detalhes_content.html" %}
+<div id="fibra-detalhes-container">
+    <div class="fibra-detalhes-wrapper" id="fibra-detalhes-wrapper">
+        {% include "partials/fibra_detalhes_content.html" %}
+    </div>
 </div>
 {% endblock %}

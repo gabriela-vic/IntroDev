@@ -202,16 +202,16 @@ def popular_banco():
             fibras_criadas[fibra.nome] = fibra
 
         # GALERIA (imagens extras)
-        print("Adicionando imagens à galeria...")
-        galeria = [
-            # Algodão
-            Galeria(url="/static/imagens/fibras/naturais/algodao/jeans.jpg", legenda="Jeans 100% algodão", fibra_id=fibras_criadas["Algodão"].id),
-            Galeria(url="/static/imagens/fibras/naturais/algodao/camisa.jpg", legenda="Camisa de algodão", fibra_id=fibras_criadas["Algodão"].id),
-            # Poliéster
-            Galeria(url="/static/imagens/fibras/sinteticas/poliester/esportivo.jpg", legenda="Tecido esportivo dry-fit", fibra_id=fibras_criadas["Poliéster"].id),
-        ]
-        for foto in galeria:
-            session.add(foto)
+        # print("Adicionando imagens à galeria...")
+        # galeria = [
+        #     # Algodão
+        #     Galeria(url="/static/imagens/fibras/naturais/algodao/jeans.jpg", legenda="Jeans 100% algodão", fibra_id=fibras_criadas["Algodão"].id),
+        #     Galeria(url="/static/imagens/fibras/naturais/algodao/camisa.jpg", legenda="Camisa de algodão", fibra_id=fibras_criadas["Algodão"].id),
+        #     # Poliéster
+        #     Galeria(url="/static/imagens/fibras/sinteticas/poliester/esportivo.jpg", legenda="Tecido esportivo dry-fit", fibra_id=fibras_criadas["Poliéster"].id),
+        # ]
+        # for foto in galeria:
+        #     session.add(foto)
 
         # POSTS DO BLOG
         print(f"Adicionando {len(POSTS)} posts ao blog...")
@@ -245,16 +245,16 @@ def popular_banco():
         total_fibras = len(fibras_criadas)
         total_posts = len(posts_criados)
         print("\n" + "="*50)
-        print("🎉 BANCO DE DADOS POPULADO COM SUCESSO!")
+        print("BANCO DE DADOS POPULADO COM SUCESSO!")
         print("="*50)
-        print(f"📊 Resumo:")
-        print(f"   👤 Usuários: 1")
-        print(f"   🌿 Fibras naturais: {len(FIBRAS_NATURAIS)}")
-        print(f"   ⚗️ Fibras sintéticas: {len(FIBRAS_SINTETICAS)}")
-        print(f"   📸 Imagens na galeria: {len(galeria)}")
-        print(f"   📝 Posts no blog: {total_posts}")
-        print(f"   💬 Comentários: 1")
-        print(f"   ❤️ Favoritos: 2")
+        print(f"Resumo:")
+        print(f"    Usuários: 1")
+        print(f"    Fibras naturais: {len(FIBRAS_NATURAIS)}")
+        print(f"    Fibras sintéticas: {len(FIBRAS_SINTETICAS)}")
+        # print(f"   Imagens na galeria: {len(galeria)}")
+        print(f"    Posts no blog: {total_posts}")
+        print(f"    Comentários: 1")
+        print(f"    Favoritos: 2")
         print("="*50)
 
 if __name__ == "__main__":

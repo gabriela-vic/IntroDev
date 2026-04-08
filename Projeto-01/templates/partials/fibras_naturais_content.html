@@ -1,5 +1,3 @@
-
-<!-- Hero Section -->
 <section class="naturais-hero">
     <div class="naturais-hero-content">
         <div class="naturais-hero-icon">🌿</div>
@@ -12,7 +10,6 @@
     </div>
 </section>
 
-<!-- Card informativo -->
 <section class="naturais-info-card">
     <div class="info-card-content">
         <h2>🌱 O que são Fibras Naturais?</h2>
@@ -37,7 +34,6 @@
     </div>
 </section>
 
-<!-- Carrossel -->
 <section class="carrossel-section">
     <h2 class="carrossel-title">🔬 Explore as Fibras Naturais</h2>
     <p class="carrossel-subtitle">Passe o mouse sobre os cards para ver mais detalhes</p>
@@ -64,7 +60,12 @@
                         <div class="carrossel-card-props">
                             <span>💧 {{ fibra.uso_performance[:50] }}...</span>
                         </div>
-                        <a href="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}" class="carrossel-card-link">Ver detalhes →</a>
+                        <a href="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}" 
+                           class="carrossel-card-link"
+                           hx-get="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}"
+                           hx-target="main"
+                           hx-push-url="true"
+                           hx-swap="innerHTML">Ver detalhes →</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +86,6 @@
     <div class="carrossel-indicators" id="carrosselIndicators"></div>
 </section>
 
-<!-- Curiosidades -->
 <section class="curiosidades-naturais">
     <h3 class="curiosidades-naturais-title">📖 Curiosidades sobre Fibras Naturais</h3>
     <div class="curiosidades-naturais-grid">

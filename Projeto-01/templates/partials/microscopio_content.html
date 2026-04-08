@@ -1,4 +1,3 @@
-
 <section class="microscopio-hero">
     <div class="microscopio-hero-content">
         <div class="microscopio-hero-icon">🔬</div>
@@ -12,7 +11,6 @@
     </div>
 </section>
 
-<!-- Grid de informações -->
 <div class="microscopio-info-grid">
     <div class="microscopio-info-card">
         <div class="info-icon">📷</div>
@@ -31,13 +29,10 @@
     </div>
 </div>
 
-<!-- Título das categorias -->
 <h2 class="categorias-title">Explore por Categoria</h2>
 <p class="categorias-subtitle">Escolha uma categoria para começar sua jornada microscópica</p>
 
-<!-- Cards de categorias -->
 <div class="categorias-grid">
-    <!-- Card Fibras Naturais -->
     <div class="categoria-card categoria-naturais" id="card-naturais">
         <div class="categoria-card-front">
             <div class="categoria-icon">🌿</div>
@@ -51,11 +46,15 @@
         </div>
         <div class="categoria-card-description">
             <p>Fibras de origem vegetal, animal e mineral. Incluem algodão, linho, seda, lã e muito mais. Renováveis, biodegradáveis e com propriedades únicas de conforto e respirabilidade.</p>
-            <a href="/catalogo?categoria=naturais" class="categoria-link">Explorar Fibras Naturais →</a>
+            <a href="/laboratorio/microscopio/fibras/naturais" 
+               class="categoria-link"
+               hx-get="/laboratorio/microscopio/fibras/naturais"
+               hx-target="main"
+               hx-push-url="true"
+               hx-swap="innerHTML">Explorar Fibras Naturais →</a>
         </div>
     </div>
 
-    <!-- Card Fibras Sintéticas -->
     <div class="categoria-card categoria-sinteticas" id="card-sinteticas">
         <div class="categoria-card-front">
             <div class="categoria-icon">⚗️</div>
@@ -69,12 +68,16 @@
         </div>
         <div class="categoria-card-description">
             <p>Fibras produzidas quimicamente como poliéster, nylon, acrílico e polipropileno. Alta durabilidade, resistência e versatilidade para aplicações técnicas e esportivas.</p>
-            <a href="/fibras/sinteticas" class="categoria-link">Explorar Fibras Sintéticas →</a>
+            <a href="/laboratorio/microscopio/fibras/sinteticas" 
+               class="categoria-link"
+               hx-get="/laboratorio/microscopio/fibras/sinteticas"
+               hx-target="main"
+               hx-push-url="true"
+               hx-swap="innerHTML">Explorar Fibras Sintéticas →</a>
         </div>
     </div>
 </div>
 
-<!-- Seção de curiosidades -->
 <section class="curiosidades-section">
     <h3 class="curiosidades-title">🔬 Curiosidades Científicas</h3>
     <div class="curiosidades-grid">

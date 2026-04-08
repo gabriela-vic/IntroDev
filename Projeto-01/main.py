@@ -51,7 +51,7 @@ async def sobre(request: Request, usuario: Optional[Usuario] = Depends(get_usuar
 @app.get("/usuarios/cadastro", response_class=HTMLResponse)
 async def form_cadastro(request: Request):
     if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/cadastro_form.html", {})
+        return templates.TemplateResponse(request, "partials/cadastro_content.html", {})
     
     return templates.TemplateResponse(request, "cadastro.html", {})
 
@@ -83,7 +83,7 @@ async def criar_usuario(
 @app.get("/login", response_class=HTMLResponse)
 async def form_login(request: Request):
     if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/login_form.html", {})
+        return templates.TemplateResponse(request, "partials/login_content.html", {})
     
     return templates.TemplateResponse(request, "login.html", {})
 
@@ -104,7 +104,6 @@ async def login(
     
     # Para requisições HTMX
     if "HX-Request" in request.headers:
-        # Cria o redirect com o cookie
         redirect_response = HTMLResponse(content=f"""
             <div>
                 <p>Bem-vindo, {usuario.nome}!</p>
@@ -281,6 +280,42 @@ async def detalhes_fibra_natural(
     })
 
 
+# Rota PARTIAL para fibra natural 
+@app.get("/laboratorio/microscopio/fibras/naturais/{fibra_id}/partial", response_class=HTMLResponse)
+async def detalhes_fibra_natural_partial(
+    request: Request,
+    fibra_id: int,
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    fibra = session.get(Fibra, fibra_id)
+    if not fibra or fibra.categoria != "Natural":
+        raise HTTPException(status_code=404, detail="Fibra não encontrada")
+    
+    fibras_categoria = session.exec(
+        select(Fibra).where(Fibra.categoria == "Natural").order_by(Fibra.id)
+    ).all()
+    
+    indices = {f.id: i for i, f in enumerate(fibras_categoria)}
+    indice_atual = indices.get(fibra_id, 0)
+    total_fibras = len(fibras_categoria)
+    
+    fibra_anterior = fibras_categoria[indice_atual - 1] if indice_atual > 0 else None
+    fibra_proxima = fibras_categoria[indice_atual + 1] if indice_atual < total_fibras - 1 else None
+    
+    
+    return templates.TemplateResponse(request, "partials/fibra_detalhes_content.html", {
+        "fibra": fibra,
+        "usuario": usuario,
+        "fibra_anterior": fibra_anterior,
+        "fibra_proxima": fibra_proxima,
+        "indice_atual": indice_atual + 1,
+        "total_fibras": total_fibras,
+        "categoria_url": "naturais"
+    })
+
+
+
 # Ler pagina fibra sintetica especifica
 @app.get("/laboratorio/microscopio/fibras/sinteticas/{fibra_id}", response_class=HTMLResponse)
 async def detalhes_fibra_sintetica(
@@ -316,6 +351,39 @@ async def detalhes_fibra_sintetica(
         })
     
     return templates.TemplateResponse(request, "fibra_detalhes.html", {
+        "fibra": fibra,
+        "usuario": usuario,
+        "fibra_anterior": fibra_anterior,
+        "fibra_proxima": fibra_proxima,
+        "indice_atual": indice_atual + 1,
+        "total_fibras": total_fibras,
+        "categoria_url": "sinteticas"
+    })
+
+# Rota PARTIAL para fibra sintetica 
+@app.get("/laboratorio/microscopio/fibras/sinteticas/{fibra_id}/partial", response_class=HTMLResponse)
+async def detalhes_fibra_sintetica_partial(
+    request: Request,
+    fibra_id: int,
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    fibra = session.get(Fibra, fibra_id)
+    if not fibra or fibra.categoria != "Sintética":
+        raise HTTPException(status_code=404, detail="Fibra não encontrada")
+    
+    fibras_categoria = session.exec(
+        select(Fibra).where(Fibra.categoria == "Sintética").order_by(Fibra.id)
+    ).all()
+    
+    indices = {f.id: i for i, f in enumerate(fibras_categoria)}
+    indice_atual = indices.get(fibra_id, 0)
+    total_fibras = len(fibras_categoria)
+    
+    fibra_anterior = fibras_categoria[indice_atual - 1] if indice_atual > 0 else None
+    fibra_proxima = fibras_categoria[indice_atual + 1] if indice_atual < total_fibras - 1 else None
+    
+    return templates.TemplateResponse(request, "partials/fibra_detalhes_content.html", {
         "fibra": fibra,
         "usuario": usuario,
         "fibra_anterior": fibra_anterior,

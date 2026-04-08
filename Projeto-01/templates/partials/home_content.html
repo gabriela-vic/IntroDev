@@ -1,6 +1,4 @@
-<!-- partials/home_content.html -->
 <div class="home-content">
-    <!-- Hero Card -->
     <section class="hero-card">
         <div class="hero-card-content">
             <div class="hero-card-text">
@@ -10,7 +8,12 @@
                     Desde materiais e processos industriais até química têxtil, psicologia da moda e sustentabilidade. 
                     Aqui, a tecnologia e a criatividade se encontram para repensar o futuro do vestuário.
                 </p>
-                <a href="/catalogo" class="hero-card-btn">Explorar Catálogo →</a>
+                <a href="/laboratorio/microscopio" 
+                   class="hero-card-btn"
+                   hx-get="/laboratorio/microscopio"
+                   hx-target="main"
+                   hx-push-url="true"
+                   hx-swap="innerHTML">Explorar Catálogo →</a>
             </div>
             <div class="hero-card-image">
                 <div class="hero-image-placeholder">
@@ -19,12 +22,11 @@
         </div>
     </section>
 
-    <!-- Pilares -->
     <section class="pilares-section">
         <h2 class="section-title">O que você vai encontrar?</h2>
         <div class="pilares-grid">
             <div class="pilar-card">
-                <div class="pilar-icon">🔬</div>
+                <div class="pilar-icon"></div>
                 <div class="pilar-content">
                     <h3>Microscopia de Fibras</h3>
                     <p>Visualize fibras naturais e sintéticas em alta resolução, entendendo sua estrutura única e propriedades.</p>
@@ -32,7 +34,7 @@
             </div>
             
             <div class="pilar-card">
-                <div class="pilar-icon">📚</div>
+                <div class="pilar-icon"></div>
                 <div class="pilar-content">
                     <h3>Conteúdo Técnico</h3>
                     <p>Detalhes sobre propriedades, performance, aplicações e inovações tecnológicas de cada tipo de fibra.</p>
@@ -40,7 +42,7 @@
             </div>
             
             <div class="pilar-card">
-                <div class="pilar-icon">🌱</div>
+                <div class="pilar-icon"></div>
                 <div class="pilar-content">
                     <h3>Sustentabilidade</h3>
                     <p>Informações sobre impacto ambiental, economia circular e alternativas sustentáveis na moda.</p>
@@ -49,12 +51,16 @@
         </div>
     </section>
 
-    <!-- Blog Preview -->
     <section class="blog-preview-section">
         <div class="blog-preview-card">
             <h2>Blog The Science of Fashion</h2>
             <p>Artigos sobre tecnologia têxtil, inovações, tendências sustentáveis e o futuro da moda</p>
-            <a href="/blog" class="btn btn-primary">Ler Blog →</a>
+            <a href="/blog" 
+               class="btn btn-primary"
+               hx-get="/blog"
+               hx-target="main"
+               hx-push-url="true"
+               hx-swap="innerHTML">Ler Blog →</a>
         </div>
     </section>
 </div>
