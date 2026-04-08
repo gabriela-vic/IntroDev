@@ -1,0 +1,46 @@
+<div id="lista-wrapper">
+    <h2>Lista de Alunos</h2>
+    
+    <input type="text" 
+        name="busca" 
+        value="{{ busca }}"
+        placeholder="Buscar aluno..."
+        hx-get="/lista"
+        hx-trigger="input changed delay:300ms"
+        hx-target="#lista-wrapper"
+        hx-push-url="true">
+    
+    <div id="lista-container">
+        <ul>
+            {% for aluno in alunos %}
+                <li>{{ aluno.id }} - {{ aluno.nome }}</li>
+            {% else %}
+                <li>Nenhum aluno encontrado</li>
+            {% endfor %}
+        </ul>
+        
+        {% if total_paginas > 1 %}
+        <div>
+            {% if pagina_atual > 1 %}
+            <button hx-get="/lista?busca={{ busca }}&pagina={{ pagina_atual - 1 }}"
+                    hx-target="#lista-wrapper"
+                    hx-push-url="true">
+                Anterior
+            </button>
+            {% endif %}
+            
+            <span>Pagina {{ pagina_atual }} de {{ total_paginas }}</span>
+            
+            {% if pagina_atual < total_paginas %}
+            <button hx-get="/lista?busca={{ busca }}&pagina={{ pagina_atual + 1 }}"
+                    hx-target="#lista-wrapper"
+                    hx-push-url="true">
+                Proxima
+            </button>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        <p>Total de alunos: {{ total }}</p>
+    </div>
+</div>
