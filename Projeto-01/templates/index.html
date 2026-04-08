@@ -3,44 +3,64 @@
 {% block title %}Home - The Science of Fashion{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <h1>🔬 A Ciência por trás da Moda</h1>
-    <p>Explore o fascinante mundo das fibras têxteis sob o microscópio</p>
-    <a href="/catalogo" class="btn" style="background: white; color: #667eea; margin-top: 1rem; display: inline-block;">Explorar Catálogo →</a>
-</div>
-
-<section>
-    <h2 style="text-align: center; margin-bottom: 2rem;">O que você vai encontrar?</h2>
-    <div class="grid">
-        <div class="card">
-            <div style="padding: 2rem; text-align: center; font-size: 3rem;">🔬</div>
-            <div class="card-content">
-                <h3>Microscopia de Fibras</h3>
-                <p>Visualize fibras naturais e sintéticas em alta resolução, entendendo sua estrutura única.</p>
-            </div>
+<section class="hero-card">
+    <div class="hero-card-content">
+        <div class="hero-card-text">
+            <h1 class="hero-card-title">A Ciência por trás da Moda</h1>
+            <p class="hero-card-description">
+                Um projeto multidisciplinar que explora a interseção entre a indústria da moda e a ciência. 
+                Desde materiais e processos industriais até química têxtil, psicologia da moda e sustentabilidade. 
+                Aqui, a tecnologia e a criatividade se encontram para repensar o futuro do vestuário.
+            </p>
+            <a href="/catalogo" class="hero-card-btn">Explorar Catálogo →</a>
         </div>
-        
-        <div class="card">
-            <div style="padding: 2rem; text-align: center; font-size: 3rem;">📚</div>
-            <div class="card-content">
-                <h3>Conteúdo Técnico</h3>
-                <p>Detalhes sobre propriedades, performance e aplicações de cada tipo de fibra.</p>
-            </div>
-        </div>
-        
-        <div class="card">
-            <div style="padding: 2rem; text-align: center; font-size: 3rem;">🌱</div>
-            <div class="card-content">
-                <h3>Sustentabilidade</h3>
-                <p>Informações sobre impacto ambiental e alternativas sustentáveis na moda.</p>
+        <div class="hero-card-image">
+            <!-- Placeholder para imagem futura -->
+            <div class="hero-image-placeholder">
             </div>
         </div>
     </div>
 </section>
 
-<section style="margin-top: 4rem; background: #f0f0f0; padding: 3rem; border-radius: 12px; text-align: center;">
-    <h2>Blog The Science of Fashion</h2>
-    <p style="margin-bottom: 1.5rem;">Artigos sobre tecnologia têxtil, inovações e tendências sustentáveis</p>
-    <a href="/blog" class="btn btn-primary">Ler Blog →</a>
+
+<section class="pilares-section">
+    <h2 class="section-title">O que você vai encontrar?</h2>
+    <div class="pilares-grid">
+        <!-- Card 1 - Microscopia -->
+        <div class="pilar-card">
+            <div class="pilar-icon">🔬</div>
+            <div class="pilar-content">
+                <h3>Microscopia de Fibras</h3>
+                <p>Visualize fibras naturais e sintéticas em alta resolução, entendendo sua estrutura única e propriedades.</p>
+            </div>
+        </div>
+        
+        <!-- Card 2 - Conteúdo Técnico -->
+        <div class="pilar-card">
+            <div class="pilar-icon">📚</div>
+            <div class="pilar-content">
+                <h3>Conteúdo Técnico</h3>
+                <p>Detalhes sobre propriedades, performance, aplicações e inovações tecnológicas de cada tipo de fibra.</p>
+            </div>
+        </div>
+        
+        <!-- Card 3 - Sustentabilidade -->
+        <div class="pilar-card">
+            <div class="pilar-icon">🌱</div>
+            <div class="pilar-content">
+                <h3>Sustentabilidade</h3>
+                <p>Informações sobre impacto ambiental, economia circular e alternativas sustentáveis na moda.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção do Blog -->
+<section class="blog-preview-section">
+    <div class="blog-preview-card">
+        <h2>Blog The Science of Fashion</h2>
+        <p>Artigos sobre tecnologia têxtil, inovações, tendências sustentáveis e o futuro da moda</p>
+        <a href="/blog" class="btn btn-primary">Ler Blog →</a>
+    </div>
 </section>
 {% endblock %}

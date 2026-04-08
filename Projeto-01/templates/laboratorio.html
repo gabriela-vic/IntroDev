@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Laboratório - The Science of Fashion{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/pages/laboratorio.css">
+{% endblock %}
+
+
+{% block content %}
+<section id="lab-hero" class="lab-hero-section">
+    <div class="lab-hero-content">
+        <h1 class="lab-hero-title">Laboratório Têxtil</h1>
+        <p class="lab-hero-description">
+            Explore a ciência por trás das fibras que vestimos. Aqui, a física, química, biologia e engenharia 
+            de materiais se encontram para revelar os segredos da indústria da moda. Da estrutura molecular 
+            aos processos de fabricação, descubra como a tecnologia transforma fios em tecidos inovadores.
+        </p>
+    </div>
+</section>
+
+<div id="lab-cards-grid" class="lab-cards-grid">
+    
+    <!-- Card 1: Microscópio -->
+    <div id="lab-card-microscopio" class="lab-card lab-card-microscopio">
+        <div class="lab-card-inner">
+            <div class="lab-card-front">
+                <div class="lab-card-icon">🔬</div>
+                <h2 class="lab-card-title">Microscopia de Fibras</h2>
+                <div class="lab-card-hover-trigger">
+                    <span>Passe o mouse para explorar</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="lab-card-back">
+                <div class="lab-card-back-content">
+                    <h3>🔬 Explorando a Microscopia</h3>
+                    <p>Analise fibras naturais e sintéticas em alta resolução. Visualize estruturas como:</p>
+                    <ul>
+                        <li>Convoluções do algodão</li>
+                        <li>Escamas da lã</li>
+                        <li>Filamentos lisos do poliéster</li>
+                        <li>Estrutura porosa do rayon</li>
+                    </ul>
+                    <a href="/catalogo" class="lab-card-link">Explorar Catálogo →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2: Cadeia Têxtil -->
+    <div id="lab-card-cadeia" class="lab-card lab-card-cadeia">
+        <div class="lab-card-inner">
+            <div class="lab-card-front">
+                <div class="lab-card-icon">🧵</div>
+                <h2 class="lab-card-title">Cadeia Têxtil</h2>
+                <div class="lab-card-hover-trigger">
+                    <span>Passe o mouse para explorar</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="lab-card-back">
+                <div class="lab-card-back-content">
+                    <h3>🧵 Da Fibra ao Tecido</h3>
+                    <p>Entenda todo o processo produtivo da indústria têxtil:</p>
+                    <ul>
+                        <li>Matéria-prima e extração</li>
+                        <li>Fiação e transformação</li>
+                        <li>Tecelagem e malharia</li>
+                        <li>Acabamentos e beneficiamentos</li>
+                        <li>Controle de qualidade</li>
+                    </ul>
+                    <a href="/catalogo" class="lab-card-link">Explorar Processos →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção complementar (futura expansão) -->
+<section id="lab-extra" class="lab-extra-section">
+    <h3 class="lab-extra-title">Em breve no Laboratório</h3>
+    <div class="lab-extra-grid">
+        <div class="lab-extra-item">
+            <span>🧪</span>
+            <p>Testes de resistência</p>
+        </div>
+        <div class="lab-extra-item">
+            <span>🌡️</span>
+            <p>Comportamento térmico</p>
+        </div>
+        <div class="lab-extra-item">
+            <span>💧</span>
+            <p>Absorção e repelência</p>
+        </div>
+        <div class="lab-extra-item">
+            <span>🔬</span>
+            <p>Análise química</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

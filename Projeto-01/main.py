@@ -102,44 +102,36 @@ async def login(
     if not usuario:
         return HTMLResponse(content="<p style='color: red;'>Usuário ou senha incorretos.</p>", status_code=401)
     
-    response.set_cookie(key="usuario_id", value=str(usuario.id), httponly=True)
-    
+    # Para requisições HTMX
     if "HX-Request" in request.headers:
-        return HTMLResponse(content=f"""
+        # Cria o redirect com o cookie
+        redirect_response = HTMLResponse(content=f"""
             <div>
                 <p>Bem-vindo, {usuario.nome}!</p>
                 <script>window.location.href = '/'</script>
             </div>
         """)
+        redirect_response.set_cookie(key="usuario_id", value=str(usuario.id), httponly=True, path="/")
+        return redirect_response
     
-    return RedirectResponse(url="/", status_code=303)
+    
+    redirect_response = RedirectResponse(url="/", status_code=303)
+    redirect_response.set_cookie(key="usuario_id", value=str(usuario.id), httponly=True, path="/")
+    return redirect_response
 
 # Logout
 @app.get("/logout", response_class=HTMLResponse)
 async def logout(request: Request, response: Response):
-    response.delete_cookie(key="usuario_id")
-    
+    # Para requisições HTMX
     if "HX-Request" in request.headers:
-        return HTMLResponse(content="<p>Logout realizado! <a href='/'>Home</a></p>")
+        redirect_response = HTMLResponse(content="<p>Logout realizado! <a href='/'>Home</a></p>")
+        redirect_response.delete_cookie(key="usuario_id", path="/")
+        return redirect_response
     
-    return RedirectResponse(url="/", status_code=303)
-
-# Formulário de edição de perfil 
-@app.get("/usuarios/editar", response_class=HTMLResponse)
-async def form_editar_usuario(
-    request: Request,
-    usuario: Optional[Usuario] = Depends(get_usuario_logado)
-):
-    if not usuario:
-        if "HX-Request" in request.headers:
-            return HTMLResponse(content="<p>Faça login primeiro</p>", status_code=401)
-        return RedirectResponse(url="/login", status_code=303)
-    
-    if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/editar_usuario_form.html", {"usuario": usuario})
-    
-    return templates.TemplateResponse(request, "editar_usuario.html", {"usuario": usuario})
-
+    # Para requisições normais
+    redirect_response = RedirectResponse(url="/", status_code=303)
+    redirect_response.delete_cookie(key="usuario_id", path="/")
+    return redirect_response
 # Editar perfil
 @app.put("/usuarios/editar", response_class=HTMLResponse)
 async def editar_usuario(
@@ -187,6 +179,17 @@ async def excluir_conta(
 
 
 # **** LABORATÓRIO ****
+
+
+@app.get("/laboratorio", response_class=HTMLResponse)
+async def apresentar_laboratorio(
+    request: Request,
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/laboratorio_content.html", {"usuario": usuario})
+    
+    return templates.TemplateResponse(request, "laboratorio.html", {"usuario": usuario})
 
 @app.get("/catalogo", response_class=HTMLResponse)
 async def listar_fibras(
@@ -251,6 +254,20 @@ async def ler_post(
 
 
 # **** INTERAÇÕES ****
+
+# Adicione esta rota no seu main.py, junto com as outras rotas
+
+@app.get("/perfil", response_class=HTMLResponse)
+async def perfil_usuario(
+    request: Request,
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    if not usuario:
+        if "HX-Request" in request.headers:
+            return HTMLResponse(content="<p>Faça login primeiro</p>", status_code=401)
+        return RedirectResponse(url="/login", status_code=303)
+    
+    return templates.TemplateResponse(request, "perfil.html", {"usuario": usuario})
 
 # Favoritar uma fibra
 @app.post("/favoritar/{fibra_id}", response_class=HTMLResponse)
@@ -441,3 +458,18 @@ async def listar_posts_favoritos(
         return templates.TemplateResponse(request, "partials/favoritos_posts_list.html", {"favoritos": favoritos})
     
     return templates.TemplateResponse(request, "favoritos_posts.html", {"favoritos": favoritos, "usuario": usuario})
+
+
+# DEBUG
+
+@app.get("/debug/session")
+async def debug_session(usuario: Optional[Usuario] = Depends(get_usuario_logado)):
+    if usuario:
+        return {
+            "logado": True,
+            "id": usuario.id,
+            "nome": usuario.nome,
+            "username": usuario.username,
+            "email": usuario.email
+        }
+    return {"logado": False}

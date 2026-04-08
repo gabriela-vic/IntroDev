@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil - The Science of Fashion{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/perfil.css">
+{% endblock %}
+
+{% block content %}
+<div class="perfil-container">
+    <!-- Informações do usuário -->
+    <div class="perfil-card">
+        <div class="perfil-header">
+            <div class="perfil-avatar">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div class="perfil-info">
+                <h1>{{ usuario.nome }}</h1>
+                <p class="username">@{{ usuario.username }}</p>
+                <p class="email">{{ usuario.email }}</p>
+                {% if usuario.bio %}
+                    <p class="bio">{{ usuario.bio }}</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="perfil-actions">
+            <a href="/usuarios/editar" class="btn btn-primary">✏️ Editar Perfil</a>
+        </div>
+    </div>
+
+    <!-- Abas de favoritos -->
+    <div class="favoritos-container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="fibras">❤️ Fibras Favoritas</button>
+            <button class="tab-btn" data-tab="posts">📌 Posts Favoritos</button>
+        </div>
+
+        <!-- Fibras favoritas -->
+        <div id="tab-fibras" class="tab-content active">
+            <div class="favoritos-grid" id="fibras-favoritas">
+                <!-- Será preenchido via HTMX -->
+                <div hx-get="/usuarios/favoritos/fibras" 
+                     hx-trigger="load"
+                     hx-target="#fibras-favoritas"
+                     hx-swap="innerHTML">
+                    <div class="loading">Carregando fibras favoritas...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts favoritos -->
+        <div id="tab-posts" class="tab-content">
+            <div class="favoritos-grid" id="posts-favoritos">
+                <div hx-get="/usuarios/favoritos/posts" 
+                     hx-trigger="load"
+                     hx-target="#posts-favoritos"
+                     hx-swap="innerHTML">
+                    <div class="loading">Carregando posts favoritos...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Abas de favoritos
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.dataset.tab;
+            
+            // Remove active de todos
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            // Adiciona active no selecionado
+            btn.classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        });
+    });
+</script>
+{% endblock %}

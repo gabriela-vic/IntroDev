@@ -4,32 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}The Science of Fashion{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    {% block extra_css %}{% endblock %}
+    
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     
+    <script src="/static/js/base.js" defer></script>
+    {% block extra_js %}{% endblock %}
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">THE SCIENCE OF FASHION</a>
-            <div class="menu">
-                <a href="/">Home</a>
-                <a href="/catalogo">Catálogo de Fibras</a>
-                <a href="/blog">Blog</a>
-                <a href="/sobre">Sobre</a>
-                
-                <div class="user-menu">
-                    {% if usuario %}
-                        <span>Olá, {{ usuario.nome }}!</span>
-                        <a href="/usuarios/editar" class="btn btn-outline">Perfil</a>
-                        <a href="/logout" class="btn btn-outline">Sair</a>
-                    {% else %}
-                        <a href="/login" class="btn btn-outline">Entrar</a>
-                        <a href="/usuarios/cadastro" class="btn btn-primary">Cadastrar</a>
-                    {% endif %}
+    <header class="main-header">
+        <div class="hero-title">
+            <h1 class="site-title">The Science of Fashion</h1>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Início</a>
+                    <a href="/sobre" class="nav-link">Sobre</a>
+                    <a href="/laboratorio" class="nav-link">Laboratório</a>
+                    <a href="/blog" class="nav-link">Blog</a>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="nav-icon-btn search-btn" aria-label="Pesquisar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+
+                    <!-- Botão Conta -->
+                    <div class="account-wrapper">
+                        <button class="nav-icon-btn account-btn" id="accountBtn" aria-label="Conta">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </button>
+                        
+                        <div class="account-dropdown" id="accountDropdown">
+                            {% if usuario %}
+                                <div class="dropdown-user-info">
+                                    <strong>{{ usuario.nome }}</strong>
+                                    <span>@{{ usuario.username }}</span>
+                                </div>
+                                <a href="/perfil" class="dropdown-item">Meu Perfil</a>
+                                <a href="/usuarios/favoritos/fibras" class="dropdown-item">Fibras Favoritas</a>
+                                <a href="/usuarios/favoritos/posts" class="dropdown-item">Posts Favoritos</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="/logout" class="dropdown-item logout">Sair</a>
+                            {% else %}
+                                <a href="/login" class="dropdown-item">Entrar</a>
+                                <a href="/usuarios/cadastro" class="dropdown-item">Cadastrar</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Botão Menu -->
+                    <button class="nav-icon-btn menu-btn" id="menuBtn" aria-label="Menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </nav>
+        </div>
+
+        <!-- Menu mobile -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <div class="mobile-menu-links">
+                <a href="/" class="mobile-link">🏠 Início</a>
+                <a href="/sobre" class="mobile-link">📖 Sobre</a>
+                <a href="/laboratorio" class="mobile-link">🔬 Laboratório</a>
+                <a href="/blog" class="mobile-link">📝 Blog</a>
+                <div class="mobile-divider"></div>
+                {% if usuario %}
+                    <a href="/perfil" class="mobile-link">👤 Meu Perfil</a>
+                    <a href="/usuarios/favoritos/fibras" class="mobile-link">❤️ Fibras Favoritas</a>
+                    <a href="/usuarios/favoritos/posts" class="mobile-link">📌 Posts Favoritos</a>
+                    <a href="/logout" class="mobile-link logout">🚪 Sair</a>
+                {% else %}
+                    <a href="/login" class="mobile-link">🔑 Entrar</a>
+                    <a href="/usuarios/cadastro" class="mobile-link">📝 Cadastrar</a>
+                {% endif %}
+            </div>
+        </div>
     </header>
 
     <main>
@@ -38,7 +108,7 @@
 
     <footer>
         <p>&copy; 2026 - The Science of Fashion - Desenvolvido por Gabriela Victor</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Explorando a ciência por trás das fibras têxteis</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Explorando a ciência por trás da indústria da moda</p>
     </footer>
 </body>
 </html>

@@ -51,7 +51,7 @@ def popular_banco():
                 "detalhes_tecnicos": "Fibra de celulose pura. Sob microscopia, apresenta convoluções (torções) características.",
                 "uso_performance": "Excelente absorção de umidade e respirabilidade. Baixa elasticidade.",
                 "sustentabilidade": "Renovável e biodegradável, mas com alto consumo hídrico.",
-                "foto_microscopio_url": "/static/imagens/fibras/algodao/microscopio.jpg"
+                "foto_microscopio_url": "/static/imagens/fibras/Naturais/algodao/microscopio.jpg"
             },
             {
                 "nome": "Poliéster",
@@ -60,7 +60,7 @@ def popular_banco():
                 "detalhes_tecnicos": "Polímero de cadeia longa. Filamentos lisos e uniformes, altamente resistentes.",
                 "uso_performance": "Alta durabilidade, resistência a rugas e secagem rápida.",
                 "sustentabilidade": "Derivado de petróleo. Desafio na reciclagem e liberação de microplásticos.",
-                "foto_microscopio_url": "/static/imagens/fibras/poliester/microscopio.jpg"
+                "foto_microscopio_url": "/static/imagens/fibras/Sinteticas/poliester/microscopio.jpg"
             }
         ]
 
@@ -75,9 +75,8 @@ def popular_banco():
         # GALERIA (Fotos extras de cada fibra)
         print("Adicionando imagens à galeria...")
         fotos = [
-            Galeria(url="/static/imagens/fibras/algodao/etiqueta.jpg", legenda="Instruções de lavagem: Algodão", fibra_id=fibras_criadas["Algodão"].id),
-            Galeria(url="/static/imagens/fibras/algodao/jeans.jpg", legenda="Denim 100% Algodão", fibra_id=fibras_criadas["Algodão"].id),
-            Galeria(url="/static/imagens/fibras/poliester/esportivo.jpg", legenda="Tecido dry-fit esportivo", fibra_id=fibras_criadas["Poliéster"].id)
+            Galeria(url="/static/imagens/fibras/Naturais/algodao/galeria_01.jpg", legenda="Instruções de lavagem: Algodão", fibra_id=fibras_criadas["Algodão"].id),
+            Galeria(url="/static/imagens/fibras/Naturais/algodao/galeria_02.jpg", legenda="Processo industrial", fibra_id=fibras_criadas["Algodão"].id)
         ]
         for foto in fotos:
             session.add(foto)
