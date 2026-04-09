@@ -200,6 +200,18 @@ def popular_banco():
         session.commit()
         session.refresh(usuario_teste)
 
+        # USUÁRIO GABRIELA
+        gabriela = Usuario(
+            nome="Gabriela Santos",
+            username="gabriela_s",
+            email="gabriela.santos@email.com",
+            senha="123",
+            bio="Pesquisadora em materiais têxteis e apaixonada por ciência da moda."
+        )
+        session.add(gabriela)
+        session.commit()
+        session.refresh(gabriela)
+
         # FIBRAS NATURAIS
         print(f"Adicionando {len(FIBRAS_NATURAIS)} fibras naturais...")
         fibras_criadas = {}
@@ -243,37 +255,23 @@ def popular_banco():
 
         # COMENTÁRIOS
         print("Adicionando comentários aos posts...")
-        comentario1 = Comentario(
-            conteudo="Excelente artigo! Como designer, sempre me pergunto sobre o impacto das fibras sintéticas. As soluções mencionadas são muito promissoras.",
-            usuario_id=usuario_teste.id,
-            post_id=posts_criados["Microplásticos: O desafio das fibras sintéticas"].id
-        )
-        session.add(comentario1)
-        session.commit()
-
-        comentario2 = Comentario(
-            conteudo="Muito informativo! Gostaria de saber mais sobre as alternativas biodegradáveis mencionadas no artigo sobre sustentabilidade.",
-            usuario_id=usuario_teste.id,
-            post_id=posts_criados["Sustentabilidade e o Futuro da Moda"].id
-        )
-        session.add(comentario2)
-        session.commit()
-
-        # COMENTÁRIOS DA MARIA SILVA
-        comentario_maria1 = Comentario(
+        
+        # Comentário da Maria Silva
+        comentario_maria = Comentario(
             conteudo="Como estudante de química, adorei a explicação sobre a estrutura molecular das fibras naturais. O algodão realmente tem uma estrutura fascinante!",
             usuario_id=usuario_teste.id,
             post_id=posts_criados["A Ciência por trás das Fibras Naturais"].id
         )
-        session.add(comentario_maria1)
+        session.add(comentario_maria)
         session.commit()
 
-        comentario_maria2 = Comentario(
-            conteudo="Concordo totalmente com as soluções apresentadas. Como consumidora consciente, procuro sempre fibras orgânicas. Obrigada pelo artigo esclarecedor!",
-            usuario_id=usuario_teste.id,
-            post_id=posts_criados["Microplásticos: O desafio das fibras sintéticas"].id
+        # Comentário da Gabriela Santos
+        comentario_gabriela = Comentario(
+            conteudo="Excelente análise sobre sustentabilidade! Como pesquisadora, vejo que as alternativas bio-based mencionadas têm grande potencial para revolucionar a indústria têxtil.",
+            usuario_id=gabriela.id,
+            post_id=posts_criados["Sustentabilidade e o Futuro da Moda"].id
         )
-        session.add(comentario_maria2)
+        session.add(comentario_gabriela)
         session.commit()
 
         # FAVORITOS DA MARIA SILVA

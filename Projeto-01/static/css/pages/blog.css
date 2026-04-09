@@ -291,8 +291,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     padding: 1rem 1.75rem;
-    background: #1a1a1a;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -301,11 +302,13 @@
     transition: all 0.2s ease;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.2);
 }
 
 .btn-favoritar:hover {
-    background: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3);
 }
 
 .btn-favoritar.disabled {
@@ -313,6 +316,7 @@
     color: #777;
     cursor: not-allowed;
     text-decoration: none;
+    box-shadow: none;
 }
 
 /* COMMENTS SECTION */
@@ -325,14 +329,16 @@
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
     color: #1a1a1a;
+    font-family: 'Playfair Display', serif;
 }
 
 /* Comment Form */
 .comment-form-container {
     margin-bottom: 2rem;
     padding: 1.5rem;
-    background: #f9fafb;
+    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
     border-radius: 20px;
+    border: 1px solid #e8e8e8;
 }
 
 .comment-form {
@@ -344,53 +350,59 @@
 .comment-form textarea {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #e5e5e5;
+    border: 2px solid #e5e5e5;
     border-radius: 12px;
     font-size: 1rem;
     font-family: inherit;
     resize: vertical;
     transition: all 0.2s ease;
+    background: #fff;
 }
 
 .comment-form textarea:focus {
     outline: none;
-    border-color: #007aff;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    border-color: #764ba2;
+    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
 }
 
 .comment-form .btn {
     align-self: flex-start;
     padding: 0.85rem 1.75rem;
-    background: #1a1a1a;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     color: #fff;
     border: none;
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.2);
 }
 
 .comment-form .btn:hover {
-    background: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3);
 }
 
 /* Login to Comment */
 .login-to-comment {
     padding: 1.5rem;
-    background: #f0f0f0;
+    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
     border-radius: 12px;
     text-align: center;
     margin-bottom: 2rem;
+    border: 1px solid #e8e8e8;
 }
 
 .login-to-comment a {
-    color: #007aff;
+    color: #764ba2;
     font-weight: 600;
     text-decoration: none;
+    transition: all 0.2s ease;
 }
 
 .login-to-comment a:hover {
+    color: #667eea;
     text-decoration: underline;
 }
 
@@ -403,9 +415,16 @@
 
 .comment-item {
     padding: 1.5rem;
-    background: #f9fafb;
-    border-radius: 12px;
-    border-left: 4px solid #007aff;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 16px;
+    border-left: 4px solid #764ba2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.comment-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(118, 75, 162, 0.1);
 }
 
 .comment-header {
@@ -419,11 +438,14 @@
 .comment-author {
     color: #1a1a1a;
     font-size: 1rem;
+    font-weight: 600;
+    color: #764ba2;
 }
 
 .comment-date {
     font-size: 0.85rem;
     color: #999;
+    font-weight: 500;
 }
 
 .btn-delete-comment {
@@ -432,20 +454,24 @@
     background: transparent;
     color: #d32f2f;
     border: 1px solid #d32f2f;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-weight: 600;
 }
 
 .btn-delete-comment:hover {
     background: #d32f2f;
     color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
 }
 
 .comment-content {
     color: #555;
     line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .no-comments {

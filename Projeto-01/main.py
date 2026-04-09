@@ -541,7 +541,7 @@ async def favoritar_fibra(
     session.add(novo_fav)
     session.commit()
     
-    return HTMLResponse(content=f"Favoritado! <button hx-delete='/favorito/fibra/{fibra_id}' hx-target='this' hx-swap='outerHTML'>Desfavoritar</button>")
+    return HTMLResponse(content=f"❤️ Favoritado! <button hx-delete='/favorito/fibra/{fibra_id}' hx-target='this' hx-swap='outerHTML'>💔 Desfavoritar</button>")
 
 # Deletar uma fibra favoritada
 @app.delete("/favorito/fibra/{fibra_id}", response_class=HTMLResponse)
@@ -562,7 +562,7 @@ async def deletar_favorito_fibra(
     if favorito:
         session.delete(favorito)
         session.commit()
-        return HTMLResponse(content="☆ Favoritar")
+        return HTMLResponse(content="🤍 Favoritar")
     return HTMLResponse(content="Erro", status_code=400)
 
 # Postar um comentário
@@ -636,7 +636,7 @@ async def favoritar_post(
     session.add(novo_fav)
     session.commit()
     
-    return HTMLResponse(content="Favoritado!")
+    return HTMLResponse(content="❤️ Favoritado!")
 
 # Remover post favorito
 @app.delete("/favorito/post/{post_id}", response_class=HTMLResponse)
@@ -661,7 +661,7 @@ async def deletar_favorito_post(
     session.delete(favorito)
     session.commit()
     
-    return HTMLResponse(content="☆ Favoritar")
+    return HTMLResponse(content="🤍 Favoritar")
 
 
 # **** ROTAS PARA LISTAS DE FAVORITOS ****
