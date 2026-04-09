@@ -135,17 +135,23 @@ FIBRAS_SINTETICAS = [
 POSTS = [
     {
         "titulo": "A Ciência por trás das Fibras Naturais",
-        "conteudo": "Exploramos como a estrutura molecular da celulose define o conforto do algodão, a resistência do linho e o brilho da seda. Entenda a relação entre morfologia da fibra e propriedades têxteis.",
+        "conteudo": """As fibras naturais representam a base histórica da indústria têxtil, com propriedades únicas derivadas de sua origem biológica. A celulose, principal componente do algodão e linho, forma estruturas cristalinas que conferem resistência e durabilidade excepcional. Sob o microscópio, podemos observar como as convoluções características do algodão criam bolsões de ar que proporcionam isolamento térmico natural e absorção de umidade superior.
+
+A seda, por sua vez, apresenta uma estrutura triangular que refrata a luz de maneira única, criando o brilho característico que a tornou tão valorizada ao longo dos séculos. A lã ovina possui escamas sobrepostas que permitem a formação de feltro e criam uma barreira natural contra o vento e a água. Essas estruturas moleculares não apenas determinam as propriedades físicas das fibras, mas também influenciam diretamente no conforto e na performance dos tecidos finais.""",
         "foto_url": "/static/imagens/blog/post1.jpg"
     },
     {
         "titulo": "Sustentabilidade e o Futuro da Moda",
-        "conteudo": "Analisamos o ciclo de vida das fibras têxteis e os novos biopolímeros. Do cultivo à reciclagem, como a indústria está se transformando para um futuro mais sustentável.",
+        "conteudo": """A indústria da moda enfrenta um desafio crítico: reconciliar a demanda crescente por vestuário com a necessidade urgente de reduzir seu impacto ambiental. O ciclo de vida das fibras têxteis, desde o cultivo ou síntese até o descarte, representa uma das maiores fontes de emissões de carbono e consumo de água no setor industrial. As fibras naturais convencionais, como o algodão, requerem quantidades significativas de água e pesticidas, enquanto as sintéticas derivadas de petróleo contribuem para a acumulação de microplásticos nos oceanos.
+
+No entanto, inovações promissoras estão emergindo no horizonte. Novos biopolímeros derivados de fontes renováveis, como o PLA (ácido poliláctico) e o PHA (poli-hidroxialcanoato), oferecem alternativas biodegradáveis às fibras sintéticas tradicionais. Tecnologias de reciclagem química avançada permitem a transformação de resíduos têxteis em novas fibras de alta qualidade, reduzindo a dependência de matérias-primas virgens. A transição para uma moda verdadeiramente sustentável exigirá colaboração entre cientistas, designers e consumidores para reimaginar todo o ecossistema têxtil.""",
         "foto_url": "/static/imagens/blog/post2.jpg"
     },
     {
         "titulo": "Microplásticos: O desafio das fibras sintéticas",
-        "conteudo": "Roupas de poliéster e nylon liberam microfibras na lavagem. Entenda o impacto ambiental e as soluções emergentes como filtros e novos materiais.",
+        "conteudo": """Cada lavagem de roupas sintéticas libera milhões de microfibras plásticas que escapam dos sistemas de tratamento de esgoto e acabam nos oceanos. Essas partículas microscópicas, menores que 5 milímetros, são ingeridas por organismos marinhos e entram na cadeia alimentar humana, acumulando toxinas e metais pesados. O poliéster e o nylon, fibras mais comuns na indústria têxtil, são particularmente problemáticos devido à sua durabilidade excepcional - uma qualidade que se transforma em maldição ambiental.
+
+Pesquisas recentes estimam que até 35% dos microplásticos encontrados nos oceanos originam-se da lavagem de roupas sintéticas. Soluções inovadoras estão sendo desenvolvidas, incluindo filtros especializados para máquinas de lavar, enzimas que degradam as fibras durante a lavagem, e novos materiais biodegradáveis que se decompõem naturalmente. A conscientização do consumidor também desempenha papel crucial: programas de coleta de roupas usadas e a preferência por fibras naturais ou recicladas podem reduzir significativamente a contribuição individual para este problema global.""",
         "foto_url": "/static/imagens/blog/post3.jpg"
     }
 ]
@@ -169,18 +175,30 @@ def popular_banco():
     with Session(engine) as session:
         limpar_banco(session)
 
-        # USUÁRIO ADMIN
-        print("Criando usuário admin...")
+        # USUÁRIOS
+        print("Criando usuários...")
         admin = Usuario(
             nome="Gabriela Victor",
             username="gabi_admin",
             email="gabi@exemplo.com",
-            senha="123", 
+            senha="123",
             bio="Estudante de Ciência da Computação e Desenvolvedora do The Science of Fashion."
         )
         session.add(admin)
         session.commit()
         session.refresh(admin)
+
+        # USUÁRIO TESTE
+        usuario_teste = Usuario(
+            nome="Maria Silva",
+            username="maria_s",
+            email="maria.silva@email.com",
+            senha="123",
+            bio="Designer de moda interessada em sustentabilidade e inovação têxtil."
+        )
+        session.add(usuario_teste)
+        session.commit()
+        session.refresh(usuario_teste)
 
         # FIBRAS NATURAIS
         print(f"Adicionando {len(FIBRAS_NATURAIS)} fibras naturais...")
@@ -214,28 +232,86 @@ def popular_banco():
         #     session.add(foto)
 
         # POSTS DO BLOG
-        print(f"Adicionando {len(POSTS)} posts ao blog...")
-        posts_criados = []
+        print(f"Adicionando {len(POSTS)} posts do blog...")
+        posts_criados = {}
         for item in POSTS:
             post = Post(**item)
             session.add(post)
             session.commit()
             session.refresh(post)
-            posts_criados.append(post)
+            posts_criados[post.titulo] = post
 
-        # COMENTÁRIO DE TESTE
-        print("Adicionando comentário de teste...")
-        comentario = Comentario(
-            conteudo="Excelente post! A explicação técnica sobre polímeros ajudou muito.",
-            usuario_id=admin.id,
-            post_id=posts_criados[0].id
+        # COMENTÁRIOS
+        print("Adicionando comentários aos posts...")
+        comentario1 = Comentario(
+            conteudo="Excelente artigo! Como designer, sempre me pergunto sobre o impacto das fibras sintéticas. As soluções mencionadas são muito promissoras.",
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["Microplásticos: O desafio das fibras sintéticas"].id
         )
-        session.add(comentario)
+        session.add(comentario1)
+        session.commit()
+
+        comentario2 = Comentario(
+            conteudo="Muito informativo! Gostaria de saber mais sobre as alternativas biodegradáveis mencionadas no artigo sobre sustentabilidade.",
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["Sustentabilidade e o Futuro da Moda"].id
+        )
+        session.add(comentario2)
+        session.commit()
+
+        # COMENTÁRIOS DA MARIA SILVA
+        comentario_maria1 = Comentario(
+            conteudo="Como estudante de química, adorei a explicação sobre a estrutura molecular das fibras naturais. O algodão realmente tem uma estrutura fascinante!",
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["A Ciência por trás das Fibras Naturais"].id
+        )
+        session.add(comentario_maria1)
+        session.commit()
+
+        comentario_maria2 = Comentario(
+            conteudo="Concordo totalmente com as soluções apresentadas. Como consumidora consciente, procuro sempre fibras orgânicas. Obrigada pelo artigo esclarecedor!",
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["Microplásticos: O desafio das fibras sintéticas"].id
+        )
+        session.add(comentario_maria2)
+        session.commit()
+
+        # FAVORITOS DA MARIA SILVA
+        print("Adicionando favoritos da Maria Silva...")
+        # Favoritos de fibras
+        favorito_fibra_maria1 = FavoritoFibra(
+            usuario_id=usuario_teste.id,
+            fibra_id=fibras_criadas["Algodão"].id
+        )
+        session.add(favorito_fibra_maria1)
+        session.commit()
+
+        favorito_fibra_maria2 = FavoritoFibra(
+            usuario_id=usuario_teste.id,
+            fibra_id=fibras_criadas["Linho"].id
+        )
+        session.add(favorito_fibra_maria2)
+        session.commit()
+
+        # Favoritos de posts
+        favorito_post_maria1 = FavoritoPost(
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["A Ciência por trás das Fibras Naturais"].id
+        )
+        session.add(favorito_post_maria1)
+        session.commit()
+
+        favorito_post_maria2 = FavoritoPost(
+            usuario_id=usuario_teste.id,
+            post_id=posts_criados["Sustentabilidade e o Futuro da Moda"].id
+        )
+        session.add(favorito_post_maria2)
+        session.commit()
 
         # FAVORITOS DE TESTE
         print("Adicionando favoritos de teste...")
         fav_fibra = FavoritoFibra(usuario_id=admin.id, fibra_id=fibras_criadas["Algodão"].id)
-        fav_post = FavoritoPost(usuario_id=admin.id, post_id=posts_criados[1].id)
+        fav_post = FavoritoPost(usuario_id=admin.id, post_id=posts_criados["Sustentabilidade e o Futuro da Moda"].id)
         session.add(fav_fibra)
         session.add(fav_post)
 
