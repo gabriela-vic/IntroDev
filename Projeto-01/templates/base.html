@@ -5,81 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}The Science of Fashion{% endblock %}</title>
     
+    <!-- base -->
     <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/index.css">
 
-    <!-- CSS de páginas -->
+    <!-- páginas -->
     <link rel="stylesheet" href="/static/css/pages/laboratorio.css">
     <link rel="stylesheet" href="/static/css/pages/microscopio.css">
     <link rel="stylesheet" href="/static/css/pages/fibras_naturais.css">
     <link rel="stylesheet" href="/static/css/pages/fibras_sinteticas.css">
     <link rel="stylesheet" href="/static/css/pages/fibra_detalhes_content.css">
     <link rel="stylesheet" href="/static/css/pages/sobre.css">
+    <link rel="stylesheet" href="/static/css/pages/blog.css">
     <link rel="stylesheet" href="/static/css/pages/login.css">
     <link rel="stylesheet" href="/static/css/pages/cadastro.css">
+    <link rel="stylesheet" href="/static/css/pages/perfil.css">
+    <link rel="stylesheet" href="/static/css/search.css">
+
     {% block extra_css %}{% endblock %}
     
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    
+    <script src="/static/js/htmx_config.js" defer></script>
     <script src="/static/js/base.js" defer></script>
+    <script src="/static/js/blog.js" defer></script>
+    <script src="/static/js/perfil.js" defer></script>
+    <script src="/static/js/search.js" defer></script>
     {% block extra_js %}{% endblock %}
 </head>
+
 <body>
+
+    <!-- HEADER -->
     <header class="main-header">
+
+        <!-- título -->
         <div class="hero-title">
             <h1 class="site-title">The Science of Fashion</h1>
             <div class="title-underline"></div>
         </div>
 
-        <div class="nav-bar">
+        <!-- navegação -->
+        <nav class="nav-bar">
             <div class="nav-container">
+
+                <!-- links -->
                 <div class="nav-links">
-                    <a href="/" 
-                       class="nav-link"
-                       hx-get="/"
-                       hx-target="main"
-                       hx-push-url="true"
-                       hx-swap="innerHTML">Início</a>
-                    
-                    <a href="/sobre" 
-                       class="nav-link"
-                       hx-get="/sobre"
-                       hx-target="main"
-                       hx-push-url="true"
-                       hx-swap="innerHTML">Sobre</a>
-                    
-                    <a href="/laboratorio" 
-                       class="nav-link"
-                       hx-get="/laboratorio"
-                       hx-target="main"
-                       hx-push-url="true"
-                       hx-swap="innerHTML">Laboratório</a>
-                    
-                    <a href="/blog" 
-                       class="nav-link"
-                       hx-get="/blog"
-                       hx-target="main"
-                       hx-push-url="true"
-                       hx-swap="innerHTML">Blog</a>
+                    <a href="/" class="nav-link"
+                       hx-get="/" hx-target="#main-content" hx-push-url="true" hx-swap="innerHTML">Início</a>
+
+                    <a href="/sobre" class="nav-link"
+                       hx-get="/sobre" hx-target="#main-content" hx-push-url="true" hx-swap="innerHTML">Sobre</a>
+
+                    <a href="/laboratorio" class="nav-link"
+                       hx-get="/laboratorio" hx-target="#main-content" hx-push-url="true" hx-swap="innerHTML">Laboratório</a>
+
+                    <a href="/blog" class="nav-link"
+                       hx-get="/blog" hx-target="#main-content" hx-push-url="true" hx-swap="innerHTML">Blog</a>
                 </div>
 
+                <!-- ações -->
                 <div class="nav-actions">
-                    <button class="nav-icon-btn search-btn" aria-label="Pesquisar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                    </button>
 
-                    <!-- Botão Conta -->
+                    <!-- busca -->
+                    <div class="search-wrapper">
+                        <button class="nav-icon-btn search-btn" id="searchBtn" aria-label="Pesquisar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+
+                        <div class="search-dropdown" id="searchDropdown">
+                            <input type="text" 
+                                   name="q"
+                                   class="search-input" 
+                                   id="searchInput"
+                                   placeholder="Buscar fibras..."
+                                   hx-get="/buscar/fibras"
+                                   hx-target="#search-results"
+                                   hx-trigger="keyup changed delay:300ms">
+                            <div id="search-results" class="search-results"></div>
+                        </div>
+                    </div>
+
+                    <!-- conta -->
                     <div class="account-wrapper">
-                        <button class="nav-icon-btn account-btn" id="accountBtn" aria-label="Conta">
+                        <button class="nav-icon-btn account-btn" id="accountBtn">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                         </button>
-                        
+
                         <div class="account-dropdown" id="accountDropdown">
                             {% if usuario %}
                                 <div class="dropdown-user-info">
@@ -98,54 +115,34 @@
                         </div>
                     </div>
 
-                    <!-- Botão Menu -->
-                    <button class="nav-icon-btn menu-btn" id="menuBtn" aria-label="Menu">
+                    <!-- menu -->
+                    <button class="nav-icon-btn menu-btn" id="menuBtn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </button>
+
                 </div>
             </div>
-        </div>
+        </nav>
 
-        <!-- Menu mobile -->
+        <!-- menu mobile -->
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-header">
                 <h3>Menu</h3>
                 <button class="close-menu" id="closeMenuBtn">&times;</button>
             </div>
+
             <div class="mobile-menu-links">
-                <a href="/" 
-                   class="mobile-link"
-                   hx-get="/"
-                   hx-target="main"
-                   hx-push-url="true"
-                   hx-swap="innerHTML">Início</a>
-                
-                <a href="/sobre" 
-                   class="mobile-link"
-                   hx-get="/sobre"
-                   hx-target="main"
-                   hx-push-url="true"
-                   hx-swap="innerHTML">Sobre</a>
-                
-                <a href="/laboratorio" 
-                   class="mobile-link"
-                   hx-get="/laboratorio"
-                   hx-target="main"
-                   hx-push-url="true"
-                   hx-swap="innerHTML">Laboratório</a>
-                
-                <a href="/blog" 
-                   class="mobile-link"
-                   hx-get="/blog"
-                   hx-target="main"
-                   hx-push-url="true"
-                   hx-swap="innerHTML">Blog</a>
-                
+                <a href="/" class="mobile-link" hx-get="/" hx-target="#main-content" hx-push-url="true">Início</a>
+                <a href="/sobre" class="mobile-link" hx-get="/sobre" hx-target="#main-content" hx-push-url="true">Sobre</a>
+                <a href="/laboratorio" class="mobile-link" hx-get="/laboratorio" hx-target="#main-content" hx-push-url="true">Laboratório</a>
+                <a href="/blog" class="mobile-link" hx-get="/blog" hx-target="#main-content" hx-push-url="true">Blog</a>
+
                 <div class="mobile-divider"></div>
+
                 {% if usuario %}
                     <a href="/perfil" class="mobile-link">Meu Perfil</a>
                     <a href="/usuarios/favoritos/fibras" class="mobile-link">Fibras Favoritas</a>
@@ -157,15 +154,19 @@
                 {% endif %}
             </div>
         </div>
+
     </header>
 
-    <main>
+    <!-- CONTEÚDO -->
+    <main id="main-content">
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
+    <!-- FOOTER -->
+    <footer class="main-footer">
         <p>&copy; 2026 - The Science of Fashion - Desenvolvido por Gabriela Victor</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Explorando a ciência por trás da indústria da moda</p>
+        <p class="footer-sub">Explorando a ciência por trás da indústria da moda</p>
     </footer>
+
 </body>
 </html>

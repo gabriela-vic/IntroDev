@@ -34,7 +34,7 @@ async def get_usuario_logado(
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request, usuario: Optional[Usuario] = Depends(get_usuario_logado)):
     if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/home_content.html", {"usuario": usuario})
+        return templates.TemplateResponse(request, "partials/index_content.html", {"usuario": usuario})
     return templates.TemplateResponse(request, "index.html", {"usuario": usuario})
 
 # Ler página sobre 
@@ -132,6 +132,20 @@ async def logout(request: Request, response: Response):
     redirect_response.delete_cookie(key="usuario_id", path="/")
     return redirect_response
 
+# Formulário para editar perfil
+@app.get("/usuarios/editar", response_class=HTMLResponse)
+async def form_editar_usuario(
+    request: Request,
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    if not usuario:
+        return RedirectResponse(url="/login", status_code=303)
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/editar_perfil_content.html", {"usuario": usuario})
+    
+    return templates.TemplateResponse(request, "editar_perfil.html", {"usuario": usuario})
+
 # Editar perfil
 @app.put("/usuarios/editar", response_class=HTMLResponse)
 async def editar_usuario(
@@ -139,6 +153,7 @@ async def editar_usuario(
     nome: Optional[str] = Form(None),
     email: Optional[str] = Form(None),
     senha: Optional[str] = Form(None),
+    bio: Optional[str] = Form(None),
     session: Session = Depends(get_session),
     usuario: Optional[Usuario] = Depends(get_usuario_logado)
 ):
@@ -151,11 +166,14 @@ async def editar_usuario(
         usuario.email = email
     if senha:
         usuario.senha = senha
+    if bio is not None:
+        usuario.bio = bio
     
     session.add(usuario)
     session.commit()
     
-    return HTMLResponse(content="<p style='color: green;'>Informações atualizadas com sucesso!</p>")
+    # Voltar para o perfil com mensagem de sucesso
+    return templates.TemplateResponse(request, "partials/perfil_content.html", {"usuario": usuario})
 
 # Deletar conta
 @app.delete("/usuarios/excluir-minha-conta", response_class=HTMLResponse)
@@ -421,10 +439,63 @@ async def ler_post(
     if not post:
         raise HTTPException(status_code=404, detail="Post não encontrado")
     
-    if "HX-Request" in request.headers:
-        return templates.TemplateResponse(request, "partials/post_detalhes.html", {"post": post, "usuario": usuario})
+    # Get all posts ordered by id for navigation
+    todos_posts = session.exec(select(Post).order_by(Post.id)).all()
+    indices = {p.id: i for i, p in enumerate(todos_posts)}
+    indice_atual = indices.get(post_id, 0)
+    total_posts = len(todos_posts)
     
-    return templates.TemplateResponse(request, "blog/post_detalhes.html", {"post": post, "usuario": usuario})
+    post_anterior = todos_posts[indice_atual - 1] if indice_atual > 0 else None
+    post_proximo = todos_posts[indice_atual + 1] if indice_atual < total_posts - 1 else None
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/post_detalhes.html", {
+            "post": post, 
+            "usuario": usuario,
+            "post_anterior": post_anterior,
+            "post_proximo": post_proximo,
+            "indice_atual": indice_atual + 1,
+            "total_posts": total_posts
+        })
+    
+    return templates.TemplateResponse(request, "blog/post_detalhes.html", {
+        "post": post, 
+        "usuario": usuario,
+        "post_anterior": post_anterior,
+        "post_proximo": post_proximo,
+        "indice_atual": indice_atual + 1,
+        "total_posts": total_posts
+    })
+
+# Rota PARTIAL para navegar entre posts
+@app.get("/blog/post/{post_id}/partial", response_class=HTMLResponse)
+async def ler_post_partial(
+    request: Request, 
+    post_id: int, 
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    post = session.get(Post, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Post não encontrado")
+    
+    # Get all posts ordered by id for navigation
+    todos_posts = session.exec(select(Post).order_by(Post.id)).all()
+    indices = {p.id: i for i, p in enumerate(todos_posts)}
+    indice_atual = indices.get(post_id, 0)
+    total_posts = len(todos_posts)
+    
+    post_anterior = todos_posts[indice_atual - 1] if indice_atual > 0 else None
+    post_proximo = todos_posts[indice_atual + 1] if indice_atual < total_posts - 1 else None
+    
+    return templates.TemplateResponse(request, "partials/post_detalhes.html", {
+        "post": post, 
+        "usuario": usuario,
+        "post_anterior": post_anterior,
+        "post_proximo": post_proximo,
+        "indice_atual": indice_atual + 1,
+        "total_posts": total_posts
+    })
 
 
 # **** INTERAÇÕES ****
@@ -439,6 +510,9 @@ async def perfil_usuario(
         if "HX-Request" in request.headers:
             return HTMLResponse(content="<p>Faça login primeiro</p>", status_code=401)
         return RedirectResponse(url="/login", status_code=303)
+    
+    if "HX-Request" in request.headers:
+        return templates.TemplateResponse(request, "partials/perfil_content.html", {"usuario": usuario})
     
     return templates.TemplateResponse(request, "perfil.html", {"usuario": usuario})
 
@@ -631,6 +705,39 @@ async def listar_posts_favoritos(
         return templates.TemplateResponse(request, "partials/favoritos_posts_list.html", {"favoritos": favoritos})
     
     return templates.TemplateResponse(request, "favoritos_posts.html", {"favoritos": favoritos, "usuario": usuario})
+
+
+# **** BUSCA ****
+
+@app.get("/buscar/fibras", response_class=HTMLResponse)
+async def buscar_fibras(
+    request: Request,
+    q: str = "",
+    session: Session = Depends(get_session),
+    usuario: Optional[Usuario] = Depends(get_usuario_logado)
+):
+    if not q or len(q) < 1:
+        return templates.TemplateResponse(request, "partials/search_results_fibras.html", {
+            "resultados": [],
+            "query": q
+        })
+    
+    # Buscar por nome, categoria ou origem (case-insensitive)
+    query_lower = f"%{q.lower()}%"
+    
+    fibras = session.exec(
+        select(Fibra).where(
+            (Fibra.nome.ilike(query_lower)) |
+            (Fibra.categoria.ilike(query_lower)) |
+            (Fibra.origem.ilike(query_lower))
+        ).limit(12)
+    ).all()
+    
+    return templates.TemplateResponse(request, "partials/search_results_fibras.html", {
+        "resultados": fibras,
+        "query": q,
+        "usuario": usuario
+    })
 
 
 # DEBUG

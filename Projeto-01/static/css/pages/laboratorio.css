@@ -1,248 +1,153 @@
-/* static/css/pages/laboratorio.css */
-
-/* Hero do Laboratório */
-.lab-hero-section {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border-radius: 24px;
-    padding: 3rem;
-    margin-bottom: 4rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* --- LAYOUT LABORATORIO --- */
+.lab-page {
+    background-color: #fff;
+    padding-bottom: 6rem;
 }
 
-.lab-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.lab-hero-description {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.1rem;
-    line-height: 1.6;
+/* --- HERO --- */
+.lab-hero {
+    padding: 6rem 0 4rem;
     max-width: 800px;
     margin: 0 auto;
-}
-
-/* Grid dos cards */
-.lab-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-}
-
-/* Card 3D com efeito flip */
-.lab-card {
-    background: transparent;
-    height: 400px;
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.lab-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    border-radius: 24px;
-}
-
-.lab-card:hover .lab-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* Frente do card */
-.lab-card-front, .lab-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-.lab-card-front {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-.lab-card-microscopio .lab-card-front {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-}
-
-.lab-card-cadeia .lab-card-front {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.lab-card-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.lab-card-title {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    font-family: 'Playfair Display', serif;
-}
-
-.lab-card-hover-trigger {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    opacity: 0.8;
-    margin-top: 2rem;
-}
-
-/* Verso do card */
-.lab-card-back {
-    background: white;
-    transform: rotateY(180deg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    text-align: left;
-    justify-content: flex-start;
-    overflow-y: auto;
-}
-
-.lab-card-back-content h3 {
-    color: #1a1a1a;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.lab-card-back-content p {
-    color: #666;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.lab-card-back-content ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-}
-
-.lab-card-back-content li {
-    padding: 0.5rem 0;
-    color: #555;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #eee;
-}
-
-.lab-card-back-content li::before {
-    content: "✓";
-    color: #667eea;
-    margin-right: 0.5rem;
-}
-
-.lab-card-link {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.lab-card-link:hover {
-    transform: translateX(5px);
-}
-
-/* Seção extra */
-.lab-extra-section {
-    background: #f8f9fa;
-    border-radius: 24px;
-    padding: 2rem;
     text-align: center;
 }
 
-.lab-extra-title {
-    font-size: 1.3rem;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
-}
-
-.lab-extra-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-}
-
-.lab-extra-item {
-    background: white;
-    padding: 1rem;
-    border-radius: 12px;
-    transition: all 0.3s;
-    cursor: pointer;
-}
-
-.lab-extra-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.lab-extra-item span {
-    font-size: 2rem;
-    display: block;
+.lab-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -2px;
     margin-bottom: 0.5rem;
 }
 
-.lab-extra-item p {
+.lab-subtitle {
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.2rem;
     color: #666;
+    margin-bottom: 2rem;
+}
+
+.lab-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+/* --- GRID DE CARDS --- */
+.grid-lab {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.lab-card {
+    border: 1px solid #eee;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.lab-card:hover {
+    border-color: #1a1a1a;
+}
+
+.card-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.lab-card h2 {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+.card-body p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2.5rem;
+}
+
+.card-list li {
     font-size: 0.85rem;
+    color: #888;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f5f5f5;
 }
 
-/* Responsividade */
+/* --- BOTAO LAB --- */
+.btn-lab {
+    display: inline-block;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #1a1a1a;
+    transition: all 0.2s;
+}
+
+.btn-lab:hover {
+    letter-spacing: 3px;
+    opacity: 0.7;
+}
+
+/* --- SECAO EM BREVE --- */
+.lab-coming-soon {
+    margin-top: 6rem;
+    border-top: 1px solid #eee;
+    padding-top: 4rem;
+}
+
+.label-center {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #bbb;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.mini-item {
+    font-size: 0.8rem;
+    color: #999;
+    text-transform: uppercase;
+}
+
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
-    .lab-hero-section {
-        padding: 2rem;
-    }
-    
-    .lab-hero-title {
-        font-size: 1.8rem;
-    }
-    
-    .lab-hero-description {
-        font-size: 1rem;
-    }
-    
-    .lab-cards-grid {
+    .grid-lab {
         grid-template-columns: 1fr;
     }
-    
-    .lab-card {
-        height: 380px;
+    .mini-grid {
+        grid-template-columns: 1fr 1fr;
     }
-    
-    .lab-card-title {
-        font-size: 1.5rem;
-    }
-    
-    .lab-extra-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .lab-card {
-        height: 420px;
-    }
-    
-    .lab-card-front, .lab-card-back {
-        padding: 1.5rem;
-    }
-    
-    .lab-extra-grid {
-        grid-template-columns: 1fr;
+    .lab-title {
+        font-size: 2.2rem;
     }
 }

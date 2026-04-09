@@ -1,0 +1,18 @@
+<!-- templates/partials/comentario_item.html -->
+
+<div class="comment-item" id="comentario-{{ comentario.id }}">
+    <div class="comment-header">
+        <strong class="comment-author">{{ comentario.usuario.username }}</strong>
+        <span class="comment-date">{{ comentario.data_postagem.strftime('%d/%m/%Y %H:%M') }}</span>
+        {% if usuario and usuario.id == comentario.usuario_id %}
+        <button hx-delete="/comentario/{{ comentario.id }}"
+                hx-target="#comentario-{{ comentario.id }}"
+                hx-swap="outerHTML"
+                hx-confirm="Tem certeza que quer deletar este comentário?"
+                class="btn-delete-comment">
+            🗑️ Excluir
+        </button>
+        {% endif %}
+    </div>
+    <p class="comment-content">{{ comentario.conteudo }}</p>
+</div>

@@ -1,0 +1,30 @@
+<!-- templates/partials/search_results_fibras.html -->
+
+<div class="search-results-container">
+    {% if resultados %}
+        <div class="search-results-list">
+            {% for fibra in resultados %}
+            <a href="{% if fibra.categoria == 'Natural' %}/laboratorio/microscopio/fibras/naturais/{% else %}/laboratorio/microscopio/fibras/sinteticas/{% endif %}{{ fibra.id }}"
+               hx-get="{% if fibra.categoria == 'Natural' %}/laboratorio/microscopio/fibras/naturais/{% else %}/laboratorio/microscopio/fibras/sinteticas/{% endif %}{{ fibra.id }}"
+               hx-target="#main-content"
+               hx-push-url="true"
+               hx-swap="innerHTML"
+               class="search-result-item">
+                <div class="search-result-name">{{ fibra.nome }}</div>
+                <div class="search-result-meta">
+                    <span class="search-result-category">{{ fibra.categoria }}</span>
+                    <span class="search-result-origem">{{ fibra.origem }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    {% elif query %}
+        <div class="search-no-results">
+            <p>Nenhuma fibra encontrada para "{{ query }}"</p>
+        </div>
+    {% else %}
+        <div class="search-empty">
+            <p>Digite para buscar...</p>
+        </div>
+    {% endif %}
+</div>

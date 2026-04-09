@@ -1,277 +1,106 @@
-/* static/css/pages/cadastro.css */
-
-.cadastro-container {
+/* --- PAGINA DE CADASTRO --- */
+.cadastro-page {
+    background-color: #fff;
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.cadastro-card {
-    max-width: 550px;
+.container-small {
+    max-width: 450px;
     width: 100%;
-    background: white;
-    border-radius: 32px;
-    padding: 2.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.5s ease-out;
+    margin: 0 auto;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.form-wrapper {
+    padding: 3rem 2rem;
+    border: 1px solid #eee;
 }
 
-.cadastro-header {
+/* --- TEXTOS --- */
+.form-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
-.cadastro-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-.cadastro-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
+.form-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: -1px;
     margin-bottom: 0.5rem;
-    font-family: 'Playfair Display', serif;
 }
 
-.cadastro-subtitle {
-    color: #666;
+.form-subtitle {
     font-size: 0.9rem;
+    color: #888;
+    font-family: serif;
+    font-style: italic;
 }
 
-.cadastro-form {
+/* --- INPUTS --- */
+.form-main {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
 }
 
-.form-group {
-    position: relative;
-}
-
-.form-label {
+.form-row {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.5rem;
 }
 
-.form-label svg {
-    opacity: 0.7;
-}
-
-.form-input {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 16px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: #667eea;
-    background: white;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-}
-
-.form-input.error {
-    border-color: #ff4444;
-}
-
-.form-hint {
-    display: block;
-    font-size: 0.7rem;
-    color: #999;
-    margin-top: 0.25rem;
-}
-
-.password-wrapper {
-    position: relative;
-}
-
-.password-toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #999;
-    transition: color 0.3s;
-    padding: 0;
-}
-
-.password-toggle:hover {
-    color: #667eea;
-}
-
-.btn-submit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 16px;
-    font-size: 1rem;
+.form-row label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 0.5rem;
 }
 
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+.form-row input {
+    padding: 0.8rem;
+    border: 1px solid #e5e5e5;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    border-radius: 0; /* Estética flat */
 }
 
-.btn-submit svg {
-    transition: transform 0.3s;
+.form-row input:focus {
+    outline: none;
+    border-color: #1a1a1a;
 }
 
-.btn-submit:hover svg {
-    transform: translateX(4px);
+/* --- FEEDBACK --- */
+.form-feedback {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
 }
 
-.spinner {
-    display: none;
-    text-align: center;
+/* --- BOTAO --- */
+.full-width {
+    width: 100%;
     margin-top: 1rem;
 }
 
-.spinner.active {
-    display: block;
-}
-
-.spinner::after {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #667eea;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.result-message {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 12px;
+/* --- FOOTER --- */
+.form-footer {
+    margin-top: 2rem;
     text-align: center;
     font-size: 0.9rem;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.result-message.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.result-message.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-.cadastro-footer {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-}
-
-.cadastro-footer p {
     color: #666;
-    font-size: 0.85rem;
 }
 
-.cadastro-footer a {
-    color: #667eea;
-    text-decoration: none;
+.form-footer a {
+    color: #1a1a1a;
     font-weight: 600;
-    transition: color 0.3s;
-}
-
-.cadastro-footer a:hover {
-    color: #764ba2;
     text-decoration: underline;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 768px) {
-    .cadastro-container {
-        padding: 1rem;
-    }
-    
-    .cadastro-card {
-        padding: 1.5rem;
-    }
-    
-    .cadastro-title {
-        font-size: 1.5rem;
-    }
-    
-    .btn-submit {
-        padding: 0.875rem;
-    }
-}
-
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 480px) {
-    .cadastro-card {
-        padding: 1.25rem;
-    }
-    
-    .cadastro-title {
-        font-size: 1.3rem;
-    }
-    
-    .form-input {
-        padding: 0.75rem;
+    .form-wrapper {
+        border: none;
+        padding: 1rem;
     }
 }

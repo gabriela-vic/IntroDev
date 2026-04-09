@@ -1,71 +1,49 @@
-<div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <div class="login-icon"></div>
-            <h1 class="login-title">Bem-vindo de volta</h1>
-            <p class="login-subtitle">Faça login para continuar sua jornada científica</p>
-        </div>
-        
-        <form id="login-form"
-              class="login-form"
-              hx-post="/login" 
-              hx-target="#resultado" 
-              hx-swap="innerHTML"
-              hx-indicator="#spinner">
+<div class="login-page">
+    <section class="login-section">
+        <div class="container-small">
             
-            <div class="form-group">
-                <label for="username" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Nome de usuário
-                </label>
-                <input type="text" 
-                       id="username" 
-                       name="username" 
-                       class="form-input"
-                       required 
-                       placeholder="Digite seu username">
-            </div>
-            
-            <div class="form-group">
-                <label for="senha" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    Senha
-                </label>
-                <div class="password-wrapper">
-                    <input type="password" 
-                           id="senha" 
-                           name="senha" 
-                           class="form-input"
-                           required 
-                           placeholder="Digite sua senha">
-                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Mostrar senha">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
+            <div class="form-wrapper">
+                <header class="form-header">
+                    <h1 class="form-title">Entrar</h1>
+                    <p class="form-subtitle">Retome sua jornada cientifica na moda.</p>
+                </header>
+
+                <form id="login-form"
+                      class="form-main"
+                      hx-post="/login" 
+                      hx-target="#resultado" 
+                      hx-swap="innerHTML">
+                    
+                    <div class="form-row">
+                        <label for="username">Nome de Usuário</label>
+                        <input type="text" 
+                               id="username" 
+                               name="username" 
+                               required 
+                               placeholder="Seu username">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="senha">Senha</label>
+                        <input type="password" 
+                               id="senha" 
+                               name="senha" 
+                               required 
+                               placeholder="Sua senha">
+                    </div>
+
+                    <div id="resultado" class="form-feedback"></div>
+
+                    <button type="submit" class="btn-primary full-width">
+                        Acessar Conta
                     </button>
-                </div>
+                </form>
+
+                <footer class="form-footer">
+                    <p>Ainda nao tem conta? <a href="/usuarios/cadastro" hx-get="/usuarios/cadastro" hx-target="#main-content" hx-push-url="true">Cadastre-se</a></p>
+                </footer>
             </div>
-            
-            <button type="submit" class="btn-submit">
-                <span>Entrar</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </button>
-            
-            <div id="spinner" class="spinner"></div>
-            <div id="resultado"></div>
-        </form>
-        
-        <div class="login-footer">
-            <p>Ainda não tem conta? <a href="/usuarios/cadastro">Cadastre-se</a></p>
+
         </div>
-    </div>
+    </section>
 </div>

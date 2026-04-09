@@ -2,137 +2,59 @@
 
 {% block title %}Cadastro - The Science of Fashion{% endblock %}
 
-{% block extra_js %}
-<script src="/static/js/pages/cadastro.js" defer></script>
-{% endblock %}
-
 {% block content %}
-<div class="cadastro-container">
-    <div class="cadastro-card">
-        <div class="cadastro-header">
-            <div class="cadastro-icon"></div>
-            <h1 class="cadastro-title">Criar Conta</h1>
-            <p class="cadastro-subtitle">Junte-se à comunidade científica da moda</p>
+<div class="cadastro-page">
+    <section class="cadastro-section">
+        <div class="container-small">
+            
+            <div class="form-wrapper">
+                <header class="form-header">
+                    <h1 class="form-title">Criar Conta</h1>
+                    <p class="form-subtitle">Junte-se à nossa comunidade científica têxtil.</p>
+                </header>
+
+                <form id="cadastro-form"
+                      class="form-main"
+                      hx-post="/usuarios/cadastro" 
+                      hx-target="#resultado" 
+                      hx-swap="innerHTML">
+
+                    <div class="form-row">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="username">Nome de Usuário</label>
+                        <input type="text" id="username" name="username" required placeholder="Ex: gabi_victor">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" required placeholder="Sua senha">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="confirmar_senha">Confirmar Senha</label>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" required placeholder="Repita a senha">
+                    </div>
+
+                    <div id="resultado" class="form-feedback"></div>
+
+                    <button type="submit" class="btn-primary full-width">Finalizar Cadastro</button>
+                </form>
+
+                <footer class="form-footer">
+                    <p>Já possui cadastro? <a href="/login" hx-get="/login" hx-target="#main-content" hx-push-url="true">Entrar</a></p>
+                </footer>
+            </div>
+
         </div>
-        
-        <form id="cadastro-form"
-              class="cadastro-form"
-              hx-post="/usuarios/cadastro" 
-              hx-target="#resultado" 
-              hx-swap="innerHTML"
-              hx-indicator="#spinner">
-            
-            <div class="form-group">
-                <label for="nome" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Nome completo
-                </label>
-                <input type="text" 
-                       id="nome" 
-                       name="nome" 
-                       class="form-input"
-                       required 
-                       placeholder="Ex: Maria Silva">
-            </div>
-            
-            <div class="form-group">
-                <label for="username" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Nome de usuário
-                </label>
-                <input type="text" 
-                       id="username" 
-                       name="username" 
-                       class="form-input"
-                       required 
-                       placeholder="Ex: maria_silva">
-                <small class="form-hint">Será usado para login (sem espaços)</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="email" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    E-mail
-                </label>
-                <input type="email" 
-                       id="email" 
-                       name="email" 
-                       class="form-input"
-                       required 
-                       placeholder="exemplo@email.com">
-            </div>
-            
-            <div class="form-group">
-                <label for="senha" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    Senha
-                </label>
-                <div class="password-wrapper">
-                    <input type="password" 
-                           id="senha" 
-                           name="senha" 
-                           class="form-input"
-                           required 
-                           placeholder="Mínimo 3 caracteres">
-                    <button type="button" class="password-toggle" data-target="senha" aria-label="Mostrar senha">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="confirmar_senha" class="form-label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    Confirmar senha
-                </label>
-                <div class="password-wrapper">
-                    <input type="password" 
-                           id="confirmar_senha" 
-                           name="confirmar_senha" 
-                           class="form-input"
-                           required 
-                           placeholder="Digite a senha novamente">
-                    <button type="button" class="password-toggle" data-target="confirmar_senha" aria-label="Mostrar senha">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn-submit">
-                <span>Criar conta</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </button>
-            
-            <div id="spinner" class="spinner"></div>
-            <div id="resultado"></div>
-        </form>
-        
-        <div class="cadastro-footer">
-            <p>Já tem uma conta? <a href="/login">Faça login</a></p>
-        </div>
-    </div>
+    </section>
 </div>
 {% endblock %}

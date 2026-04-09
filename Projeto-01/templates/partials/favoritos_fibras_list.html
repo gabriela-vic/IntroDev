@@ -1,0 +1,33 @@
+<!-- templates/partials/favoritos_fibras_list.html -->
+
+{% if favoritos %}
+    {% for fibra in favoritos %}
+    <div class="favorito-card"
+         hx-get="/laboratorio/microscopio/fibras/{{ fibra.categoria|lower }}/{{ fibra.id }}"
+         hx-target="#main-content"
+         hx-push-url="true"
+         hx-swap="innerHTML"
+         style="cursor: pointer;">
+        
+        <div class="favorito-card-image">
+            <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}">
+        </div>
+
+        <div class="favorito-card-content">
+            <h3 class="favorito-card-title">{{ fibra.nome }}</h3>
+            <div class="favorito-card-meta">
+                <span class="tag-categoria">{{ fibra.categoria }}</span>
+                <span class="tag-origem">{{ fibra.origem }}</span>
+            </div>
+            <p class="favorito-card-description">{{ fibra.detalhes_tecnicos[:80] }}...</p>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+<div class="no-favorites">
+    <p>Você ainda não tem nenhuma fibra favorita.</p>
+    <a href="/laboratorio/microscopio/fibras/naturais" class="btn btn-primary">
+        Explorar Fibras
+    </a>
+</div>
+{% endif %}

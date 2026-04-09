@@ -1,101 +1,88 @@
-<section class="microscopio-hero">
-    <div class="microscopio-hero-content">
-        <div class="microscopio-hero-icon">🔬</div>
-        <h1 class="microscopio-hero-title">Microscopia de Fibras Têxteis</h1>
-        <p class="microscopio-hero-description">
-            Explore o mundo invisível das fibras através do microscópio. Cada fibra possui uma estrutura única 
-            que determina suas propriedades, performance e aplicações na indústria da moda. Da morfologia do algodão 
-            às superfícies lisas das fibras sintéticas, descubra como a ciência dos materiais transforma a maneira 
-            como nos vestimos.
-        </p>
-    </div>
-</section>
+<div class="micro-page">
+    
+    <section class="micro-hero">
+        <div class="container">
+            <h1 class="micro-title">Investigação Microscópica</h1>
+            <p class="micro-subtitle">A morfologia das fibras sob análise técnica.</p>
+            <p class="micro-description">
+                Explore o mundo invisível das fibras. Cada material possui uma estrutura única 
+                que determina suas propriedades químicas e físicas. Da morfologia do algodão 
+                à superfície uniforme dos polímeros sintéticos, entenda a ciência dos materiais.
+            </p>
+        </div>
+    </section>
 
-<div class="microscopio-info-grid">
-    <div class="microscopio-info-card">
-        <div class="info-icon">📷</div>
-        <h3>Imagens de Alta Resolução</h3>
-        <p>Visualize fibras em detalhes microscópicos, identificando estruturas únicas como convoluções, escamas e poros.</p>
-    </div>
-    <div class="microscopio-info-card">
-        <div class="info-icon">📊</div>
-        <h3>Propriedades Técnicas</h3>
-        <p>Analise resistência, elasticidade, absorção e comportamento térmico de cada tipo de fibra.</p>
-    </div>
-    <div class="microscopio-info-card">
-        <div class="info-icon">🔍</div>
-        <h3>Identificação Científica</h3>
-        <p>Aprenda a diferenciar fibras naturais e sintéticas através de suas características microscópicas.</p>
-    </div>
-</div>
-
-<h2 class="categorias-title">Explore por Categoria</h2>
-<p class="categorias-subtitle">Escolha uma categoria para começar sua jornada microscópica</p>
-
-<div class="categorias-grid">
-    <div class="categoria-card categoria-naturais" id="card-naturais">
-        <div class="categoria-card-front">
-            <div class="categoria-icon">🌿</div>
-            <h2 class="categoria-title">Fibras Naturais</h2>
-            <div class="categoria-hover-trigger">
-                <span>Clique para explorar</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+    <section class="micro-info">
+        <div class="container grid-info">
+            <div class="info-item">
+                <span class="info-label">Visualização</span>
+                <h3>Alta Resolução</h3>
+                <p>Identificação de convoluções, escamas e porosidade em nível micrométrico.</p>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Dados</span>
+                <h3>Propriedades</h3>
+                <p>Análise de resistência, elasticidade e comportamento térmico estrutural.</p>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Ciência</span>
+                <h3>Identificação</h3>
+                <p>Diferenciação técnica entre polímeros naturais, artificiais e sintéticos.</p>
             </div>
         </div>
-        <div class="categoria-card-description">
-            <p>Fibras de origem vegetal, animal e mineral. Incluem algodão, linho, seda, lã e muito mais. Renováveis, biodegradáveis e com propriedades únicas de conforto e respirabilidade.</p>
-            <a href="/laboratorio/microscopio/fibras/naturais" 
-               class="categoria-link"
-               hx-get="/laboratorio/microscopio/fibras/naturais"
-               hx-target="main"
-               hx-push-url="true"
-               hx-swap="innerHTML">Explorar Fibras Naturais →</a>
-        </div>
-    </div>
+    </section>
 
-    <div class="categoria-card categoria-sinteticas" id="card-sinteticas">
-        <div class="categoria-card-front">
-            <div class="categoria-icon">⚗️</div>
-            <h2 class="categoria-title">Fibras Sintéticas</h2>
-            <div class="categoria-hover-trigger">
-                <span>Clique para explorar</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+    <section class="micro-categorias">
+        <div class="container">
+            <div class="label-center">Categorias de Estudo</div>
+            
+            <div class="grid-categorias">
+                <article class="cat-card">
+                    <div class="cat-content">
+                        <h2>Fibras Naturais</h2>
+                        <p>Materiais de origem vegetal e animal. Renováveis e biodegradáveis, com estruturas celulares complexas.</p>
+                        <a href="/laboratorio/microscopio/fibras/naturais" 
+                           class="btn-cat"
+                           hx-get="/laboratorio/microscopio/fibras/naturais"
+                           hx-target="#main-content"
+                           hx-push-url="true"
+                           hx-swap="innerHTML">Explorar Naturais</a>
+                    </div>
+                </article>
+
+                <article class="cat-card">
+                    <div class="cat-content">
+                        <h2>Fibras Sintéticas</h2>
+                        <p>Polímeros de cadeia longa produzidos quimicamente. Alta durabilidade e versatilidade técnica.</p>
+                        <a href="/laboratorio/microscopio/fibras/sinteticas" 
+                           class="btn-cat"
+                           hx-get="/laboratorio/microscopio/fibras/sinteticas"
+                           hx-target="#main-content"
+                           hx-push-url="true"
+                           hx-swap="innerHTML">Explorar Sintéticas</a>
+                    </div>
+                </article>
             </div>
         </div>
-        <div class="categoria-card-description">
-            <p>Fibras produzidas quimicamente como poliéster, nylon, acrílico e polipropileno. Alta durabilidade, resistência e versatilidade para aplicações técnicas e esportivas.</p>
-            <a href="/laboratorio/microscopio/fibras/sinteticas" 
-               class="categoria-link"
-               hx-get="/laboratorio/microscopio/fibras/sinteticas"
-               hx-target="main"
-               hx-push-url="true"
-               hx-swap="innerHTML">Explorar Fibras Sintéticas →</a>
-        </div>
-    </div>
-</div>
+    </section>
 
-<section class="curiosidades-section">
-    <h3 class="curiosidades-title">🔬 Curiosidades Científicas</h3>
-    <div class="curiosidades-grid">
-        <div class="curiosidade-item">
-            <span class="curiosidade-numero">01</span>
-            <p>A lã de ovelha tem escamas sobrepostas que permitem a formação de feltro.</p>
+    <section class="micro-curiosidades">
+        <div class="container">
+            <div class="curio-grid">
+                <div class="curio-box">
+                    <span class="curio-num">01</span>
+                    <p>A lã apresenta escamas sobrepostas que permitem a feltragem natural.</p>
+                </div>
+                <div class="curio-box">
+                    <span class="curio-num">02</span>
+                    <p>O algodão possui convoluções que otimizam a absorção hídrica.</p>
+                </div>
+                <div class="curio-box">
+                    <span class="curio-num">03</span>
+                    <p>O poliéster exibe filamentos lisos, garantindo resistência a rugas.</p>
+                </div>
+            </div>
         </div>
-        <div class="curiosidade-item">
-            <span class="curiosidade-numero">02</span>
-            <p>O algodão apresenta convoluções naturais que facilitam a absorção de água.</p>
-        </div>
-        <div class="curiosidade-item">
-            <span class="curiosidade-numero">03</span>
-            <p>O poliéster tem superfície lisa e uniforme, o que o torna resistente a rugas.</p>
-        </div>
-        <div class="curiosidade-item">
-            <span class="curiosidade-numero">04</span>
-            <p>A seda possui estrutura triangular que cria efeitos de brilho e iridescência.</p>
-        </div>
-    </div>
-</section>
+    </section>
+
+</div>

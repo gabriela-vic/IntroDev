@@ -1,0 +1,38 @@
+<!-- templates/partials/favoritos_posts_list.html -->
+
+{% if favoritos %}
+    {% for post in favoritos %}
+    <div class="favorito-card"
+         hx-get="/blog/post/{{ post.id }}"
+         hx-target="#main-content"
+         hx-push-url="true"
+         hx-swap="innerHTML"
+         style="cursor: pointer;">
+        
+        {% if post.foto_url %}
+        <div class="favorito-card-image">
+            <img src="{{ post.foto_url }}" alt="{{ post.titulo }}">
+        </div>
+        {% else %}
+        <div class="favorito-card-image placeholder">
+            <span>📝</span>
+        </div>
+        {% endif %}
+
+        <div class="favorito-card-content">
+            <h3 class="favorito-card-title">{{ post.titulo }}</h3>
+            <div class="favorito-card-meta">
+                <span class="post-date">📅 {{ post.data_publicacao.strftime('%d/%m/%Y') }}</span>
+            </div>
+            <p class="favorito-card-description">{{ post.conteudo[:80] }}...</p>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+<div class="no-favorites">
+    <p>Você ainda não tem nenhum post favorito.</p>
+    <a href="/blog" class="btn btn-primary">
+        Explorar Blog
+    </a>
+</div>
+{% endif %}

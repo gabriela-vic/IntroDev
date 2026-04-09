@@ -1,221 +1,137 @@
-/* static/css/pages/sobre.css */
+/* --- LAYOUT SOBRE --- */
+.sobre-page {
+    background-color: #fff;
+    padding-bottom: 4rem;
+}
 
+.sobre-section {
+    padding: 6rem 0;
+}
+
+.section-border {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.section-bg {
+    background-color: #f9f9f9;
+}
+
+/* --- HERO --- */
 .sobre-hero {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    border-radius: 32px;
-    padding: 4rem 2rem;
-    margin-bottom: 3rem;
+    padding: 8rem 0 4rem;
     text-align: center;
 }
 
-.sobre-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+.sobre-title {
+    font-size: 4rem;
     font-weight: 700;
-    color: white;
+    text-transform: uppercase;
+    letter-spacing: -2px;
     margin-bottom: 1rem;
 }
 
-.sobre-hero-description {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.section-title {
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #1a1a1a;
-    position: relative;
-    padding-bottom: 0.75rem;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 3px;
-}
-
-.motivacao-section {
-    margin-bottom: 4rem;
-}
-
-.motivacao-card {
-    background: white;
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.motivacao-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.motivacao-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #444;
-    margin-bottom: 1rem;
-}
-
-.motivacao-text:last-child {
-    margin-bottom: 0;
-}
-
-.objetivos-section {
-    margin-bottom: 4rem;
-    background: #f8f9fa;
-    padding: 3rem 0;
-    border-radius: 32px;
-}
-
-.objetivos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.objetivo-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.objetivo-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.objetivo-icon {
-    font-size: 2rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-}
-
-.objetivo-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #1a1a1a;
-}
-
-.objetivo-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
+.sobre-subtitle {
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.2rem;
     color: #666;
 }
 
-.autora-section {
-    margin-bottom: 3rem;
+/* --- GRID E CONTEUDO --- */
+.grid-sobre {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4rem;
 }
 
-.autora-card {
-    background: white;
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #999;
+    padding-top: 0.5rem;
 }
 
-.autora-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.autora-info {
+.label-center {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #999;
     text-align: center;
+    margin-bottom: 4rem;
 }
 
-.autora-nome {
+.lead-text {
     font-size: 1.5rem;
-    font-weight: 700;
+    line-height: 1.4;
     color: #1a1a1a;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.content p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+}
+
+/* --- OBJETIVOS GRID --- */
+.objetivos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+}
+
+.objetivo-item {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 1.5rem;
+}
+
+.num {
+    display: block;
+    font-size: 0.8rem;
     margin-bottom: 1rem;
+    color: #999;
+}
+
+.objetivo-item h3 {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.objetivo-item p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- AUTORA --- */
+.autora-nome {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
 }
 
 .autora-bio {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.7;
-    color: #555;
-    max-width: 700px;
-    margin: 0 auto 1rem auto;
 }
 
-.autora-bio:last-child {
-    margin-bottom: 0;
-}
-
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
-    .sobre-hero {
-        padding: 2rem 1rem;
-    }
-    
-    .sobre-hero-title {
-        font-size: 2rem;
-    }
-    
-    .sobre-hero-description {
-        font-size: 1rem;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    .objetivos-grid {
+    .grid-sobre {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
     }
-    
-    .motivacao-card {
-        padding: 1.5rem;
+    .sobre-title {
+        font-size: 2.5rem;
     }
-    
-    .autora-card {
-        padding: 1.5rem;
-    }
-    
-    .autora-nome {
-        font-size: 1.3rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .sobre-hero-title {
-        font-size: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1.3rem;
-    }
-    
-    .objetivo-title {
-        font-size: 1.1rem;
+    .sobre-section {
+        padding: 4rem 0;
     }
 }

@@ -1,83 +1,64 @@
-// static/js/fibras_naturais.js
-// Carrossel para a página de fibras naturais
+(function() {
+    function init() {
+        const track = document.getElementById('carrosselTrack');
+        const prevBtn = document.getElementById('btnPrev');
+        const nextBtn = document.getElementById('btnNext');
+        if (!track || !prevBtn || !nextBtn) return;
 
-document.addEventListener('DOMContentLoaded', function() {
-    const track = document.getElementById('carrosselTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const indicatorsContainer = document.getElementById('carrosselIndicators');
-    
-    if (!track || !prevBtn || !nextBtn || !indicatorsContainer) return;
-    
-    let currentIndex = 0;
-    let cardsPerView = getCardsPerView();
-    let totalCards = track.children.length;
-    
-    function getCardsPerView() {
-        if (window.innerWidth < 640) return 1;
-        if (window.innerWidth < 1024) return 2;
-        return 3;
-    }
-    
-    function updateCarrossel() {
-        const cardWidth = track.children[0]?.offsetWidth || 300;
-        const gap = 24; // gap entre cards em pixels
-        const scrollAmount = currentIndex * (cardWidth + gap);
-        track.style.transform = `translateX(-${scrollAmount}px)`;
-        updateIndicators();
-    }
-    
-    function updateIndicators() {
-        const totalPages = Math.ceil(totalCards / cardsPerView);
-        const indicators = document.querySelectorAll('.indicator-dot');
-        indicators.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
-    }
-    
-    function createIndicators() {
-        const totalPages = Math.ceil(totalCards / cardsPerView);
-        indicatorsContainer.innerHTML = '';
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement('button');
-            dot.classList.add('indicator-dot');
-            if (i === currentIndex) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                currentIndex = i;
+        let currentIndex = 0;
+        let cardsPerView = getCardsPerView();
+
+        function getCardsPerView() {
+            if (window.innerWidth <= 768) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 3;
+        }
+
+        function getCardWidth() {
+            const firstCard = track.querySelector('.fibra-card');
+            if (!firstCard) return 0;
+            const style = window.getComputedStyle(firstCard);
+            const gap = parseFloat(window.getComputedStyle(track).columnGap || 20);
+            return firstCard.getBoundingClientRect().width + gap;
+        }
+
+        function getMaxIndex() {
+            return Math.max(0, track.children.length - cardsPerView);
+        }
+
+        function updateCarrossel() {
+            const cardWidth = getCardWidth();
+            if (!cardWidth) return;
+            const maxIndex = getMaxIndex();
+            if (currentIndex > maxIndex) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = maxIndex;
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        prevBtn.onclick = () => {
+            const maxIndex = getMaxIndex();
+            currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+            updateCarrossel();
+        };
+
+        nextBtn.onclick = () => {
+            const maxIndex = getMaxIndex();
+            currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+            updateCarrossel();
+        };
+
+        window.addEventListener('resize', function() {
+            const newCardsPerView = getCardsPerView();
+            if (newCardsPerView !== cardsPerView) {
+                cardsPerView = newCardsPerView;
+                currentIndex = 0;
                 updateCarrossel();
-            });
-            indicatorsContainer.appendChild(dot);
-        }
+            }
+        });
+
+        updateCarrossel();
     }
-    
-    prevBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(totalCards / cardsPerView);
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarrossel();
-        }
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(totalCards / cardsPerView);
-        if (currentIndex < totalPages - 1) {
-            currentIndex++;
-            updateCarrossel();
-        }
-    });
-    
-    window.addEventListener('resize', () => {
-        const newCardsPerView = getCardsPerView();
-        if (newCardsPerView !== cardsPerView) {
-            cardsPerView = newCardsPerView;
-            currentIndex = 0;
-            track.style.transform = 'translateX(0)';
-            createIndicators();
-        }
-    });
-    
-    // Inicializar
-    if (totalCards > 0) {
-        createIndicators();
-    }
-});
+
+    document.addEventListener('DOMContentLoaded', init);
+    document.body.addEventListener('htmx:afterOnLoad', init);
+})();

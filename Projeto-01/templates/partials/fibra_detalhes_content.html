@@ -1,97 +1,136 @@
 
-<div class="back-link">
-    <a href="/laboratorio/microscopio/fibras/{{ categoria_url }}" class="btn-back">Voltar para {{ categoria_url }}</a>
-</div>
 
-<div class="fibra-navegacao">
-    {% if fibra_anterior %}
-    <button class="nav-fibra-btn anterior"
-            hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}/partial"
-            hx-target="#fibra-detalhes-wrapper"
-            hx-swap="innerHTML"
-            hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18l-6-6 6-6"/>
-        </svg>
-        <span>{{ fibra_anterior.nome }}</span>
-    </button>
-    {% else %}
-    <div class="nav-placeholder"></div>
-    {% endif %}
+<div class="fibra-content-root">
 
-    <span class="fibra-counter">{{ indice_atual }} de {{ total_fibras }}</span>
-
-    {% if fibra_proxima %}
-    <button class="nav-fibra-btn proximo"
-            hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}/partial"
-            hx-target="#fibra-detalhes-wrapper"
-            hx-swap="innerHTML"
-            hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}">
-        <span>{{ fibra_proxima.nome }}</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6"/>
-        </svg>
-    </button>
-    {% else %}
-    <div class="nav-placeholder"></div>
-    {% endif %}
-</div>
-
-<div class="fibra-detalhes-card">
-    <div class="fibra-header">
-        <h1 class="fibra-titulo">{{ fibra.nome }}</h1>
-        <div class="fibra-tags">
-            <span class="tag-categoria">{{ fibra.categoria }}</span>
-            <span class="tag-origem">{{ fibra.origem }}</span>
-        </div>
+    <!-- BACK -->
+    <div class="back-link">
+        <a href="/laboratorio/microscopio/fibras/{{ categoria_url }}"
+           hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}"
+           hx-target="#main-content"
+           hx-push-url="true"
+           class="btn-back">
+            Voltar para {{ categoria_url }}
+        </a>
     </div>
 
-    <div class="fibra-grid">
-        <div class="fibra-imagem">
-            <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}">
-            <p class="img-legenda">Visualizacao microscopica</p>
-        </div>
+    <!-- NAVEGAÇÃO -->
+    <div class="fibra-navegacao">
 
-        <div class="fibra-info">
-            <div class="info-section">
-                <h3>Detalhes Tecnicos</h3>
-                <p>{{ fibra.detalhes_tecnicos }}</p>
-            </div>
+        {% if fibra_anterior %}
+        <button type="button"
+                class="nav-fibra-btn anterior"
+                hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}/partial"
+                hx-target="#fibra-detalhes-wrapper"
+                hx-swap="innerHTML swap:1s"
+                hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}"
+                hx-trigger="click"
+                hx-indicator="#loading-indicator">
 
-            <div class="info-section">
-                <h3>Uso e Performance</h3>
-                <p>{{ fibra.uso_performance }}</p>
-            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            <span>{{ fibra_anterior.nome }}</span>
+        </button>
+        {% else %}
+        <div class="nav-placeholder"></div>
+        {% endif %}
 
-            <div class="info-section">
-                <h3>Sustentabilidade</h3>
-                <p>{{ fibra.sustentabilidade }}</p>
-            </div>
+        <span class="fibra-counter">
+            {{ indice_atual }} de {{ total_fibras }}
+        </span>
 
-            {% if usuario %}
-            <button class="btn-favoritar" 
-                    hx-post="/favoritar/{{ fibra.id }}"
-                    hx-target="this"
-                    hx-swap="outerHTML">
-                Favoritar esta fibra
-            </button>
-            {% else %}
-            <a href="/login" class="btn-favoritar disabled">Faça login para favoritar</a>
-            {% endif %}
-        </div>
+        {% if fibra_proxima %}
+        <button type="button"
+                class="nav-fibra-btn proximo"
+                hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}/partial"
+                hx-target="#fibra-detalhes-wrapper"
+                hx-swap="innerHTML swap:1s"
+                hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}"
+                hx-trigger="click"
+                hx-indicator="#loading-indicator">
+
+            <span>{{ fibra_proxima.nome }}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+        {% else %}
+        <div class="nav-placeholder"></div>
+        {% endif %}
+
     </div>
 
-    {% if fibra.fotos %}
-    <div class="galeria-section">
-        <h3>Galeria de Aplicacoes</h3>
-        <div class="galeria-grid">
-            {% for foto in fibra.fotos %}
-            <div class="galeria-item">
-                <img src="{{ foto.url }}" alt="{{ foto.legenda }}">
-                <p>{{ foto.legenda }}</p>
+    <!-- CARD -->
+    <div class="fibra-detalhes-card">
+
+        <div class="fibra-header">
+            <h1 class="fibra-titulo">{{ fibra.nome }}</h1>
+            <div class="fibra-tags">
+                <span class="tag-categoria">{{ fibra.categoria }}</span>
+                <span class="tag-origem">{{ fibra.origem }}</span>
             </div>
-            {% endfor %}
         </div>
+
+        <div class="fibra-grid">
+
+            <div class="fibra-imagem">
+                <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}">
+                <p class="img-legenda">Visualização microscópica</p>
+            </div>
+
+            <div class="fibra-info">
+
+                <div class="info-section">
+                    <h3>Detalhes Técnicos</h3>
+                    <p>{{ fibra.detalhes_tecnicos }}</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Uso e Performance</h3>
+                    <p>{{ fibra.uso_performance }}</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Sustentabilidade</h3>
+                    <p>{{ fibra.sustentabilidade }}</p>
+                </div>
+
+                {% if usuario %}
+                <button class="btn-favoritar" 
+                        hx-post="/favoritar/{{ fibra.id }}"
+                        hx-target="this"
+                        hx-swap="outerHTML">
+                    Favoritar esta fibra
+                </button>
+                {% else %}
+                <a href="/login" class="btn-favoritar disabled">
+                    Faça login para favoritar
+                </a>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% if fibra.fotos %}
+        <div class="galeria-section">
+            <h3>Galeria de Aplicações</h3>
+            <div class="galeria-grid">
+                {% for foto in fibra.fotos %}
+                <div class="galeria-item">
+                    <img src="{{ foto.url }}" alt="{{ foto.legenda }}">
+                    <p>{{ foto.legenda }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
     </div>
-    {% endif %}
+
+    <!-- LOADING INDICATOR  -->
+    <div id="loading-indicator" style="display:none;">
+        Carregando...
+    </div>
+
 </div>

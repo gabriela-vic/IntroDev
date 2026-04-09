@@ -1,0 +1,75 @@
+<!-- templates/partials/perfil_content.html -->
+
+<div class="perfil-content-root">
+
+    <!-- PERFIL HEADER -->
+    <div class="perfil-card">
+        <div class="perfil-header">
+            <div class="perfil-avatar">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div class="perfil-info">
+                <h1 class="perfil-nome">{{ usuario.nome }}</h1>
+                <p class="perfil-username">@{{ usuario.username }}</p>
+                <p class="perfil-email">{{ usuario.email }}</p>
+                {% if usuario.bio %}
+                <p class="perfil-bio">{{ usuario.bio }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="perfil-actions">
+            <a href="/usuarios/editar"
+               hx-get="/usuarios/editar"
+               hx-target="#main-content"
+               hx-push-url="true"
+               hx-swap="innerHTML"
+               class="btn btn-primary">
+                ✏️ Editar Perfil
+            </a>
+            <button hx-delete="/usuarios/excluir-minha-conta"
+                    hx-confirm="Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita."
+                    hx-target="#main-content"
+                    hx-swap="innerHTML"
+                    class="btn btn-danger">
+                🗑️ Deletar Conta
+            </button>
+        </div>
+    </div>
+
+    <!-- FAVORITOS SECTION -->
+    <div class="favoritos-container">
+        <div class="favoritos-tabs">
+            <button class="tab-btn active" data-tab="fibras">
+                ❤️ Fibras Favoritas
+            </button>
+            <button class="tab-btn" data-tab="posts">
+                📌 Posts Favoritos
+            </button>
+        </div>
+
+        <!-- Fibras Favoritas -->
+        <div id="tab-fibras" class="tab-content active">
+            <div class="favoritos-grid" id="fibras-favoritas"
+                 hx-get="/usuarios/favoritos/fibras"
+                 hx-trigger="load"
+                 hx-swap="innerHTML">
+                <div class="loading">Carregando fibras favoritas...</div>
+            </div>
+        </div>
+
+        <!-- Posts Favoritos -->
+        <div id="tab-posts" class="tab-content">
+            <div class="favoritos-grid" id="posts-favoritos"
+                 hx-get="/usuarios/favoritos/posts"
+                 hx-trigger="load"
+                 hx-swap="innerHTML">
+                <div class="loading">Carregando posts favoritos...</div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,105 +1,79 @@
-<section class="naturais-hero">
-    <div class="naturais-hero-content">
-        <div class="naturais-hero-icon">🌿</div>
-        <h1 class="naturais-hero-title">Fibras Naturais</h1>
-        <p class="naturais-hero-description">
-            As fibras naturais são obtidas diretamente da natureza, seja de fontes vegetais, animais ou minerais. 
-            Renováveis, biodegradáveis e com propriedades únicas de conforto, respirabilidade e toque agradável, 
-            elas são a escolha sustentável para um futuro mais consciente na moda.
-        </p>
-    </div>
-</section>
+<div class="naturais-page theme-oliva">
 
-<section class="naturais-info-card">
-    <div class="info-card-content">
-        <h2>🌱 O que são Fibras Naturais?</h2>
-        <p>Fibras naturais são aquelas encontradas na natureza em sua forma básica. Elas podem ser classificadas em três categorias principais:</p>
-        <div class="info-card-grid">
-            <div class="info-item">
-                <span class="info-emoji">🌾</span>
-                <h3>Vegetais</h3>
-                <p>Algodão, linho, juta, cânhamo, rami</p>
-            </div>
-            <div class="info-item">
-                <span class="info-emoji">🐑</span>
-                <h3>Animais</h3>
-                <p>Lã, seda, cashmere, alpaca, mohair</p>
-            </div>
-            <div class="info-item">
-                <span class="info-emoji">⛰️</span>
-                <h3>Minerais</h3>
-                <p>Amianto (uso restrito), fibras de vidro</p>
-            </div>
+    <section class="hero-header">
+        <div class="container">
+            <span class="eyebrow">Origem Botânica & Animal</span>
+            <h1 class="main-title">Fibras Naturais</h1>
+            <p class="hero-text">Investigação científica de polímeros orgânicos e suas propriedades morfológicas.</p>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="carrossel-section">
-    <h2 class="carrossel-title">🔬 Explore as Fibras Naturais</h2>
-    <p class="carrossel-subtitle">Passe o mouse sobre os cards para ver mais detalhes</p>
-    
-    <div class="carrossel-container" id="carrossel-container">
-        <button class="carrossel-btn prev-btn" id="prevBtn" aria-label="Anterior">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 18l-6-6 6-6"/>
-            </svg>
-        </button>
-        
-        <div class="carrossel-track" id="carrosselTrack">
-            {% for fibra in fibras %}
-            <div class="carrossel-card">
-                <div class="carrossel-card-inner">
-                    <div class="carrossel-card-front">
-                        <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}" class="carrossel-card-img">
-                        <h3 class="carrossel-card-title">{{ fibra.nome }}</h3>
-                        <span class="carrossel-card-tag">{{ fibra.origem }}</span>
-                    </div>
-                    <div class="carrossel-card-back">
-                        <h4>{{ fibra.nome }}</h4>
-                        <p class="carrossel-card-desc">{{ fibra.detalhes_tecnicos[:120] }}...</p>
-                        <div class="carrossel-card-props">
-                            <span>💧 {{ fibra.uso_performance[:50] }}...</span>
-                        </div>
-                        <a href="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}" 
-                           class="carrossel-card-link"
-                           hx-get="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}"
-                           hx-target="main"
-                           hx-push-url="true"
-                           hx-swap="innerHTML">Ver detalhes →</a>
-                    </div>
+    <section class="info-grid-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card-box">
+                    <span class="info-num">01</span>
+                    <h3>Vegetais</h3>
+                    <p>Base celulósica: Algodão, Linho e Juta.</p>
+                </div>
+                <div class="info-card-box">
+                    <span class="info-num">02</span>
+                    <h3>Animais</h3>
+                    <p>Base proteica: Lã, Seda e Cashmere.</p>
+                </div>
+                <div class="info-card-box">
+                    <span class="info-num">03</span>
+                    <h3>Minerais</h3>
+                    <p>Fibras de silicatos e rochas naturais.</p>
                 </div>
             </div>
-            {% else %}
-            <div class="carrossel-empty">
-                <p>Nenhuma fibra natural cadastrada ainda.</p>
-            </div>
-            {% endfor %}
         </div>
-        
-        <button class="carrossel-btn next-btn" id="nextBtn" aria-label="Próximo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 18l6-6-6-6"/>
-            </svg>
-        </button>
-    </div>
-    
-    <div class="carrossel-indicators" id="carrosselIndicators"></div>
-</section>
+    </section>
 
-<section class="curiosidades-naturais">
-    <h3 class="curiosidades-naturais-title">📖 Curiosidades sobre Fibras Naturais</h3>
-    <div class="curiosidades-naturais-grid">
-        <div class="curiosidade-card">
-            <span class="curiosidade-emoji">🌾</span>
-            <p>O algodão é a fibra natural mais utilizada no mundo, representando cerca de 25% de todas as fibras têxteis.</p>
+    <section class="carrossel-section">
+        <div class="container">
+            <div class="carrossel-header">
+                <h2>Catálogo de Microscopia</h2>
+                <div class="divider-oliva"></div>
+            </div>
+
+            <div class="carrossel-wrapper">
+                <button class="nav-btn prev" id="btnPrev" aria-label="Anterior">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+
+                <div class="carrossel-viewport">
+                    <div class="carrossel-track" id="carrosselTrack">
+                        {% for fibra in fibras %}
+                        <div class="fibra-card">
+                            <div class="fibra-card-inner">
+                                <img src="{{ fibra.foto_microscopio_url }}" alt="{{ fibra.nome }}" class="fibra-img">
+                                <div class="fibra-overlay">
+                                    <h4>{{ fibra.nome }}</h4>
+                                    <p>{{ fibra.detalhes_tecnicos[:100] }}...</p>
+                                    <a href="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}" 
+                                       hx-get="/laboratorio/microscopio/fibras/naturais/{{ fibra.id }}"
+                                       hx-target="#main-content"
+                                       hx-push-url="true"
+                                       class="btn-card">Analisar Estrutura</a>
+                                </div>
+                            </div>
+                            <div class="fibra-label">
+                                <h3>{{ fibra.nome }}</h3>
+                                <span>{{ fibra.origem }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button class="nav-btn next" id="btnNext" aria-label="Próximo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
         </div>
-        <div class="curiosidade-card">
-            <span class="curiosidade-emoji">🐑</span>
-            <p>A lã de ovelha pode absorver até 30% do seu peso em água sem se sentir molhada.</p>
-        </div>
-        <div class="curiosidade-card">
-            <span class="curiosidade-emoji">🦢</span>
-            <p>O linho é duas vezes mais resistente que o algodão e fica mais forte quando molhado.</p>
-        </div>
-    </div>
-</section>
+    </section>
+
+</div>
+
+<script src="/static/js/fibras_naturais.js"></script>

@@ -1,0 +1,157 @@
+<!-- templates/partials/post_detalhes.html -->
+
+<div class="blog-content-root">
+
+    <!-- BACK -->
+    <div class="back-link">
+        <a href="/blog"
+           hx-get="/blog"
+           hx-target="#main-content"
+           hx-push-url="true"
+           class="btn-back">
+            ← Voltar para o blog
+        </a>
+    </div>
+
+    <!-- NAVEGAÇÃO ENTRE POSTS -->
+    <div class="post-navegacao">
+
+        {% if post_anterior %}
+        <button type="button"
+                class="nav-post-btn anterior"
+                hx-get="/blog/post/{{ post_anterior.id }}/partial"
+                hx-target="#post-detalhes-wrapper"
+                hx-swap="innerHTML"
+                hx-push-url="/blog/post/{{ post_anterior.id }}"
+                hx-indicator="#loading-indicator">
+
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            <span>{{ post_anterior.titulo }}</span>
+        </button>
+        {% else %}
+        <div class="nav-placeholder"></div>
+        {% endif %}
+
+        <span class="post-counter">
+            {{ indice_atual }} de {{ total_posts }}
+        </span>
+
+        {% if post_proximo %}
+        <button type="button"
+                class="nav-post-btn proximo"
+                hx-get="/blog/post/{{ post_proximo.id }}/partial"
+                hx-target="#post-detalhes-wrapper"
+                hx-swap="innerHTML"
+                hx-push-url="/blog/post/{{ post_proximo.id }}"
+                hx-indicator="#loading-indicator">
+
+            <span>{{ post_proximo.titulo }}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+        {% else %}
+        <div class="nav-placeholder"></div>
+        {% endif %}
+
+    </div>
+
+    <!-- CARD DO POST -->
+    <div class="post-detalhes-card">
+
+        <div class="post-header">
+            <h1 class="post-titulo">{{ post.titulo }}</h1>
+            <div class="post-meta">
+                <span class="post-date">📅 {{ post.data_publicacao.strftime('%d de %B de %Y') }}</span>
+            </div>
+        </div>
+
+        <!-- Imagem de destaque -->
+        {% if post.foto_url %}
+        <div class="post-featured-image">
+            <img src="{{ post.foto_url }}" alt="{{ post.titulo }}">
+        </div>
+        {% endif %}
+
+        <!-- Conteúdo do post -->
+        <div class="post-content">
+            {{ post.conteudo }}
+        </div>
+
+        <!-- Botão favoritar -->
+        <div class="post-actions">
+            {% if usuario %}
+            <button hx-post="/blog/{{ post.id }}/favoritar" 
+                    hx-target="this" 
+                    hx-swap="outerHTML"
+                    class="btn-favoritar">
+                ☆ Favoritar este artigo
+            </button>
+            {% else %}
+            <a href="/login" class="btn-favoritar disabled">
+                🔒 Faça login para favoritar
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Seção de comentários -->
+        <div class="comments-section">
+            <h3 class="comments-title">💬 Comentários ({{ post.comentarios|length }})</h3>
+            
+            <!-- Formulário de novo comentário -->
+            {% if usuario %}
+            <div class="comment-form-container">
+                <form class="comment-form" 
+                      hx-post="/blog/{{ post.id }}/comentar" 
+                      hx-target="#comments-list" 
+                      hx-swap="beforeend"
+                      hx-on::after-swap="this.reset()">
+                    <textarea name="conteudo" 
+                              rows="3" 
+                              placeholder="Deixe seu comentário..." 
+                              required></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar comentário</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="login-to-comment">
+                <p><a href="/login" hx-get="/login" hx-target="#main-content" hx-push-url="true">Faça login</a> para deixar um comentário</p>
+            </div>
+            {% endif %}
+
+            <!-- Lista de comentários -->
+            <div id="comments-list" class="comments-list">
+                {% for comentario in post.comentarios %}
+                <div class="comment-item" id="comentario-{{ comentario.id }}">
+                    <div class="comment-header">
+                        <strong class="comment-author">{{ comentario.usuario.username }}</strong>
+                        <span class="comment-date">{{ comentario.data_postagem.strftime('%d/%m/%Y %H:%M') }}</span>
+                        {% if usuario and usuario.id == comentario.usuario_id %}
+                        <button hx-delete="/comentario/{{ comentario.id }}"
+                                hx-target="#comentario-{{ comentario.id }}"
+                                hx-swap="outerHTML"
+                                hx-confirm="Tem certeza que quer deletar este comentário?"
+                                class="btn-delete-comment">
+                            🗑️ Excluir
+                        </button>
+                        {% endif %}
+                    </div>
+                    <p class="comment-content">{{ comentario.conteudo }}</p>
+                </div>
+                {% else %}
+                <div class="no-comments">
+                    <p>Seja o primeiro a comentar!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING INDICATOR -->
+    <div id="loading-indicator" style="display:none;">
+        Carregando...
+    </div>
+
+</div>

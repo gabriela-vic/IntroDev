@@ -1,0 +1,89 @@
+<!-- templates/partials/editar_perfil_content.html -->
+
+<div class="editar-perfil-content-root">
+
+    <!-- BACK -->
+    <div class="back-link">
+        <a href="/perfil"
+           hx-get="/perfil"
+           hx-target="#main-content"
+           hx-push-url="true"
+           class="btn-back">
+            ← Voltar para o Perfil
+        </a>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="editar-perfil-card">
+
+        <div class="editar-perfil-header">
+            <h1>Editar Perfil</h1>
+            <p>Atualize suas informações pessoais</p>
+        </div>
+
+        <form class="editar-perfil-form"
+              hx-put="/usuarios/editar"
+              hx-target="#main-content"
+              hx-swap="innerHTML">
+
+            <!-- Nome -->
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text"
+                       id="nome"
+                       name="nome"
+                       value="{{ usuario.nome }}"
+                       placeholder="Seu nome completo"
+                       class="form-input">
+            </div>
+
+            <!-- Bio (opcional) -->
+            <div class="form-group">
+                <label for="bio">Bio (opcional)</label>
+                <textarea id="bio"
+                          name="bio"
+                          placeholder="Conte um pouco sobre você"
+                          rows="3"
+                          class="form-textarea">{{ usuario.bio or '' }}</textarea>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       value="{{ usuario.email }}"
+                       placeholder="seu@email.com"
+                       class="form-input">
+            </div>
+
+            <!-- Senha -->
+            <div class="form-group">
+                <label for="senha">Nova Senha (deixe em branco para manter)</label>
+                <input type="password"
+                       id="senha"
+                       name="senha"
+                       placeholder="Deixe em branco para não alterar"
+                       class="form-input">
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    💾 Salvar Alterações
+                </button>
+                <a href="/perfil"
+                   hx-get="/perfil"
+                   hx-target="#main-content"
+                   hx-push-url="true"
+                   class="btn btn-secondary">
+                    ✕ Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

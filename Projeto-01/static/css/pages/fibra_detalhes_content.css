@@ -1,66 +1,15 @@
 /* static/css/pages/fibra_detalhes_content.css */
 
-.fibra-detalhes-wrapper {
-    max-width: 1200px;
+.fibra-content-root {
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 2rem 1rem 4rem;
 }
 
-/* Navegação entre fibras */
-.fibra-navegacao {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
+#fibra-detalhes-wrapper {
+    min-height: 400px;
 }
 
-.nav-fibra-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #333;
-    transition: all 0.3s ease;
-}
-
-.nav-fibra-btn:hover {
-    background: #007aff;
-    border-color: #007aff;
-    color: white;
-    transform: translateX(-3px);
-}
-
-.nav-fibra-btn.proximo:hover {
-    transform: translateX(3px);
-}
-
-.nav-fibra-btn svg {
-    transition: transform 0.2s ease;
-}
-
-.nav-fibra-btn:hover svg {
-    transform: scale(1.1);
-}
-
-.fibra-counter {
-    font-size: 0.85rem;
-    color: #666;
-    background: #f0f0f0;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-}
-
-.nav-placeholder {
-    width: 100px;
-}
-
-/* Botão voltar */
 .back-link {
     margin-bottom: 1.5rem;
 }
@@ -69,52 +18,104 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #1a1a1a;
     text-decoration: none;
-    color: #007aff;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-back:hover {
-    text-decoration: underline;
-    transform: translateX(-3px);
+    background: #f7f7f8;
+    transform: translateX(-2px);
 }
 
-/* Card principal da fibra */
+.fibra-navegacao {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.nav-fibra-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 999px;
+    color: #1a1a1a;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.nav-fibra-btn:hover {
+    background: #f5f5f7;
+    transform: translateX(1px);
+}
+
+.nav-fibra-btn.proximo:hover {
+    transform: translateX(2px);
+}
+
+.nav-fibra-btn svg {
+    stroke: currentColor;
+}
+
+.fibra-counter {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: #f0f0f0;
+    color: #666;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.nav-placeholder {
+    width: 100px;
+    min-height: 44px;
+}
+
 .fibra-detalhes-card {
-    background: white;
-    border-radius: 24px;
+    background: #fff;
+    border-radius: 28px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
 }
 
-/* Header da fibra */
 .fibra-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 2rem;
-    color: white;
+    background: linear-gradient(135deg, #f4f5f7 0%, #ffffff 100%);
+    padding: 2.5rem 2rem 1.8rem;
+    color: #1a1a1a;
 }
 
 .fibra-titulo {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
     font-family: 'Playfair Display', serif;
+    line-height: 1.05;
 }
 
 .fibra-tags {
     display: flex;
-    gap: 0.5rem;
     flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
-.tag-categoria, .tag-origem {
-    padding: 0.25rem 0.75rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    font-size: 0.8rem;
+.tag-categoria,
+.tag-origem {
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: #f0f0f0;
+    font-size: 0.85rem;
+    color: #333;
 }
 
-/* Grid de conteúdo */
 .fibra-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -122,168 +123,151 @@
     padding: 2rem;
 }
 
-/* Imagem */
 .fibra-imagem img {
     width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .img-legenda {
+    margin-top: 1rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #666;
-    margin-top: 0.5rem;
 }
 
-/* Informações da fibra */
 .info-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .info-section h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
 }
 
 .info-section p {
-    color: #666;
-    line-height: 1.6;
+    color: #555;
+    line-height: 1.8;
 }
 
-/* Botão favoritar */
 .btn-favoritar {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #007aff;
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    margin-top: 1.25rem;
+    background: #1a1a1a;
+    color: #fff;
     border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
 }
 
 .btn-favoritar:hover {
-    background: #0056b3;
+    background: #333;
     transform: translateY(-2px);
 }
 
 .btn-favoritar.disabled {
     background: #ccc;
+    color: #777;
     cursor: not-allowed;
-    text-decoration: none;
 }
 
-.btn-favoritar.disabled:hover {
-    transform: none;
-}
-
-/* Galeria */
 .galeria-section {
     padding: 2rem;
     border-top: 1px solid #eee;
 }
 
 .galeria-section h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #1a1a1a;
 }
 
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
     margin-top: 1rem;
 }
 
 .galeria-item {
-    background: #f8f9fa;
-    border-radius: 12px;
+    background: #f7f7f8;
+    border-radius: 22px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .galeria-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
 }
 
 .galeria-item img {
     width: 100%;
-    height: 150px;
+    height: 180px;
     object-fit: cover;
 }
 
 .galeria-item p {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-    color: #666;
+    padding: 0.9rem;
+    font-size: 0.9rem;
+    color: #555;
     text-align: center;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .fibra-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         padding: 1.5rem;
     }
-    
+
+    .fibra-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+
     .fibra-navegacao {
-        flex-wrap: wrap;
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .nav-placeholder {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .btn-back,
+    .nav-fibra-btn {
+        width: 100%;
         justify-content: center;
     }
-    
-    .nav-fibra-btn span {
-        display: none;
-    }
-    
-    .nav-fibra-btn {
-        padding: 0.6rem 1rem;
-    }
-    
-    .nav-placeholder {
-        width: 50px;
-    }
-    
+
     .fibra-titulo {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
-    
-    .fibra-header {
-        padding: 1.5rem;
-    }
-    
+
     .galeria-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 480px) {
-    .fibra-titulo {
-        font-size: 1.5rem;
-    }
-    
-    .fibra-navegacao {
-        gap: 0.5rem;
-    }
-    
     .fibra-counter {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.9rem;
     }
-    
+
     .btn-favoritar {
         width: 100%;
-        text-align: center;
-    }
-    
-    .galeria-grid {
-        grid-template-columns: 1fr;
     }
 }
