@@ -21,9 +21,8 @@
                 class="nav-fibra-btn anterior"
                 hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}/partial"
                 hx-target="#fibra-detalhes-wrapper"
-                hx-swap="innerHTML swap:1s"
+                hx-swap="innerHTML"
                 hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_anterior.id }}"
-                hx-trigger="click"
                 hx-indicator="#loading-indicator">
 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -44,9 +43,8 @@
                 class="nav-fibra-btn proximo"
                 hx-get="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}/partial"
                 hx-target="#fibra-detalhes-wrapper"
-                hx-swap="innerHTML swap:1s"
+                hx-swap="innerHTML"
                 hx-push-url="/laboratorio/microscopio/fibras/{{ categoria_url }}/{{ fibra_proxima.id }}"
-                hx-trigger="click"
                 hx-indicator="#loading-indicator">
 
             <span>{{ fibra_proxima.nome }}</span>

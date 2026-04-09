@@ -51,6 +51,7 @@
     border-radius: 999px;
     color: #1a1a1a;
     font-weight: 700;
+    cursor: pointer;
     transition: all 0.2s ease;
 }
 
